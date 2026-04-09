@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PTA改革レポート_2026</title>
+<style>
+  @font-face { font-family: AdjustedYuGothic; font-weight: 400; src: local("Yu Gothic Medium"); }
+  @font-face { font-family: AdjustedYuGothic; font-weight: 700; src: local("Yu Gothic Bold"); }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: AdjustedYuGothic, "Yu Gothic", YuGothic, "Hiragino Sans", sans-serif; font-size: 16px; line-height: 1.5; color: #23221e; background: #f8f7f6; min-height: 100vh; }
+
+  .site-header { background: #0077c7; color: #fff; padding: 40px 0 32px; }
+  .site-header .inner { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+  .site-header .label { font-size: 0.75rem; letter-spacing: 0.12rem; opacity: 0.8; margin-bottom: 10px; text-transform: uppercase; }
+  .site-header h1 { font-size: 1.8rem; font-weight: 700; line-height: 1.25; margin-bottom: 8px; }
+  .site-header .desc { font-size: 0.857rem; opacity: 0.85; line-height: 1.6; }
+
+  .container { max-width: 800px; margin: 0 auto; padding: 40px 24px; }
+
+  /* 年度セクション */
+  .year-section { margin-bottom: 40px; }
+  .year-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .year-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #fff;
+    background: #23221e;
+    border-radius: 4px;
+    padding: 3px 10px;
+    letter-spacing: 0.05rem;
+  }
+  .year-line { flex: 1; height: 1px; background: #d6d3d0; }
+
+  /* まとめカード */
+  .summary-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #0077c7;
+    color: #fff;
+    border-radius: 8px;
+    padding: 20px 24px;
+    text-decoration: none;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(0,119,199,0.25);
+    transition: background 0.15s;
+  }
+  .summary-link:hover { background: #005fa3; }
+  .summary-link .left h2 { font-size: 1rem; font-weight: 700; margin-bottom: 2px; }
+  .summary-link .left p { font-size: 0.75rem; opacity: 0.85; }
+  .summary-link .arrow { font-size: 1.2rem; opacity: 0.8; }
+
+  /* 個別レポートリスト */
+  .report-list { display: flex; flex-direction: column; gap: 8px; }
+  .report-card {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #d6d3d0;
+    border-radius: 6px;
+    padding: 16px 20px;
+    text-decoration: none;
+    color: #23221e;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    transition: border-color 0.15s, box-shadow 0.15s;
+    gap: 16px;
+  }
+  .report-card:hover { border-color: #0077c7; box-shadow: 0 2px 8px rgba(0,119,199,0.15); }
+  .report-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #f8f7f6;
+    border: 2px solid #d6d3d0;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #706d65;
+    flex-shrink: 0;
+    line-height: 1.2;
+    text-align: center;
+  }
+  .report-card:hover .report-num { border-color: #0077c7; color: #0077c7; background: #e8f4fd; }
+  .report-body { flex: 1; }
+  .report-body .title { font-weight: 700; font-size: 0.929rem; margin-bottom: 2px; }
+  .report-body .theme { font-size: 0.75rem; color: #706d65; }
+  .report-meta { font-size: 0.75rem; color: #aaa69f; flex-shrink: 0; text-align: right; line-height: 1.6; }
+  .report-arrow { color: #c1bdb7; font-size: 1rem; flex-shrink: 0; }
+  .report-card:hover .report-arrow { color: #0077c7; }
+
+  /* 今後追加予定 */
+  .placeholder {
+    border: 1px dashed #d6d3d0;
+    border-radius: 6px;
+    padding: 16px 20px;
+    color: #aaa69f;
+    font-size: 0.857rem;
+    text-align: center;
+  }
+
+  .footer { background: #edebe8; border-top: 1px solid #d6d3d0; padding: 24px; text-align: center; font-size: 0.75rem; color: #706d65; margin-top: 40px; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="inner">
+    <div class="label">宮前平小学校 PTA</div>
+    <h1>PTA改革レポート_2026</h1>
+    <div class="desc">保護者意識調査の結果と、PTA運営改革の取り組みをまとめたレポート集です。</div>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="year-section">
+    <div class="year-label">
+      <span class="year-badge">2025–2026年度</span>
+      <div class="year-line"></div>
+    </div>
+
+    <!-- まとめレポート -->
+    <a href="report/2026_03/index.html" class="summary-link">
+      <div class="left">
+        <h2>第1〜3回 意識調査まとめ</h2>
+        <p>総回答数 930件 ／ 3回分の横断分析・自由回答インサイト</p>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+
+    <!-- 個別レポート -->
+    <div class="report-list">
+      <a href="report/2026_03/report001.html" class="report-card">
+        <div class="report-num">第1回</div>
+        <div class="report-body">
+          <div class="title">第1回 意識調査レポート</div>
+          <div class="theme">PTAの任意性・参加形態のニーズ・デジタル化への意向</div>
+        </div>
+        <div class="report-meta">n = 308件<br>自由記述 61件</div>
+        <div class="report-arrow">›</div>
+      </a>
+      <a href="report/2026_03/report002.html" class="report-card">
+        <div class="report-num">第2回</div>
+        <div class="report-body">
+          <div class="title">第2回 意識調査レポート</div>
+          <div class="theme">集金の独立運営・ツール選定・入会ルール設計</div>
+        </div>
+        <div class="report-meta">n = 318件<br>自由記述 43件</div>
+        <div class="report-arrow">›</div>
+      </a>
+      <a href="report/2026_03/report003.html" class="report-card">
+        <div class="report-num">第3回</div>
+        <div class="report-body">
+          <div class="title">第3回 意識調査レポート</div>
+          <div class="theme">スタイル制の詳細・会費設定・外注方針・最適化</div>
+        </div>
+        <div class="report-meta">n = 304件<br>自由記述 47件</div>
+        <div class="report-arrow">›</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="year-section">
+    <div class="year-label">
+      <span class="year-badge">2026–2027年度</span>
+      <div class="year-line"></div>
+    </div>
+    <div class="placeholder">今後のレポートがここに追加されます</div>
+  </div>
+
+</div>
+
+<div class="footer">
+  宮前平小学校 PTA ／ 本レポートは保護者向けに公開されています。個人が特定される情報は含まれておりません。
+</div>
+
+</body>
+</html>
