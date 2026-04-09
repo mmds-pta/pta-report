@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第3回 PTA意識調査 アンケート結果レポート</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  @font-face {
+    font-family: AdjustedYuGothic;
+    font-weight: 400;
+    src: local("Yu Gothic Medium");
+  }
+  @font-face {
+    font-family: AdjustedYuGothic;
+    font-weight: 700;
+    src: local("Yu Gothic Bold");
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: AdjustedYuGothic, "Yu Gothic", YuGothic, "Hiragino Sans", sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #23221e;
+    background: #f8f7f6;
+  }
+
+  /* Header */
+  .site-header {
+    background: #0077c7;
+    color: #fff;
+    padding: 32px 0;
+  }
+  .site-header .inner {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .site-header .label {
+    font-size: 0.857rem;
+    letter-spacing: 0.1rem;
+    opacity: 0.85;
+    margin-bottom: 8px;
+  }
+  .site-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 8px;
+  }
+  .site-header .meta {
+    font-size: 0.857rem;
+    opacity: 0.85;
+  }
+
+  /* Main container */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 24px;
+  }
+
+  /* Summary cards */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  @media (max-width: 599px) {
+    .summary-grid { grid-template-columns: 1fr; }
+  }
+  .summary-card {
+    background: #fff;
+    border: 1px solid #d6d3d0;
+    border-radius: 6px;
+    padding: 24px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  .summary-card .num {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #0077c7;
+    line-height: 1.1;
+  }
+  .summary-card .unit {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0077c7;
+  }
+  .summary-card .desc {
+    font-size: 0.857rem;
+    color: #706d65;
+    margin-top: 6px;
+  }
+
+  /* Section */
+  .section {
+    margin-bottom: 40px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #0077c7;
+  }
+  .section-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: #0077c7;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 0.857rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.4;
+    color: #23221e;
+  }
+  .section-subtitle {
+    font-size: 0.857rem;
+    color: #706d65;
+    margin-top: 2px;
+  }
+
+  /* Card */
+  .card {
+    background: #fff;
+    border: 1px solid #d6d3d0;
+    border-radius: 6px;
+    padding: 24px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  /* Chart layout */
+  .chart-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+  @media (max-width: 599px) {
+    .chart-row { grid-template-columns: 1fr; }
+  }
+  .chart-card {
+    background: #fff;
+    border: 1px solid #d6d3d0;
+    border-radius: 6px;
+    padding: 24px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  .chart-card h3 {
+    font-size: 0.857rem;
+    font-weight: 700;
+    color: #23221e;
+    margin-bottom: 4px;
+    line-height: 1.4;
+  }
+  .chart-card .q-note {
+    font-size: 0.75rem;
+    color: #706d65;
+    margin-bottom: 16px;
+  }
+  .chart-wrap {
+    position: relative;
+    height: 200px;
+  }
+  .chart-wrap-bar {
+    position: relative;
+    height: 260px;
+  }
+
+  /* Highlight result */
+  .result-highlight {
+    background: #f8f7f6;
+    border-left: 4px solid #0077c7;
+    border-radius: 0 6px 6px 0;
+    padding: 12px 16px;
+    margin-top: 16px;
+    font-size: 0.857rem;
+    color: #23221e;
+  }
+  .result-highlight strong {
+    color: #0077c7;
+    font-size: 1rem;
+  }
+
+  /* Bar summary (horizontal) */
+  .bar-summary {
+    margin-top: 8px;
+  }
+  .bar-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    font-size: 0.857rem;
+  }
+  .bar-label {
+    width: 280px;
+    flex-shrink: 0;
+    color: #23221e;
+    line-height: 1.3;
+  }
+  .bar-track {
+    flex: 1;
+    background: #edebe8;
+    border-radius: 4px;
+    height: 18px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s;
+  }
+  .bar-pct {
+    width: 50px;
+    text-align: right;
+    font-weight: 700;
+    color: #23221e;
+    flex-shrink: 0;
+  }
+
+  /* Comments */
+  .comment-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 599px) {
+    .comment-grid { grid-template-columns: 1fr; }
+  }
+  .comment-card {
+    background: #fff;
+    border: 1px solid #d6d3d0;
+    border-radius: 6px;
+    padding: 16px;
+    font-size: 0.857rem;
+    line-height: 1.6;
+    color: #23221e;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+  }
+  .comment-card::before {
+    content: '\201C';
+    font-size: 2rem;
+    color: #d6d3d0;
+    line-height: 1;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .comment-tag {
+    display: inline-block;
+    background: #f2f1f0;
+    color: #706d65;
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    margin-top: 8px;
+  }
+  .comment-tag.positive { background: #e8f4fd; color: #0077c7; }
+  .comment-tag.concern  { background: #fff3cd; color: #8a6500; }
+  .comment-tag.request  { background: #f0f9f0; color: #2a7a2a; }
+
+  /* Summary analysis */
+  .analysis-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  @media (max-width: 599px) {
+    .analysis-grid { grid-template-columns: 1fr; }
+  }
+  .analysis-item {
+    display: flex;
+    gap: 12px;
+    padding: 16px;
+    background: #fff;
+    border: 1px solid #d6d3d0;
+    border-radius: 6px;
+  }
+  .analysis-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  .analysis-icon.blue   { background: #e8f4fd; }
+  .analysis-icon.green  { background: #e8f5e9; }
+  .analysis-icon.yellow { background: #fffde7; }
+  .analysis-icon.red    { background: #fce4ec; }
+  .analysis-body h4 {
+    font-size: 0.857rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: #23221e;
+  }
+  .analysis-body p {
+    font-size: 0.857rem;
+    color: #706d65;
+    line-height: 1.5;
+  }
+
+  /* Footer */
+  .footer {
+    background: #edebe8;
+    border-top: 1px solid #d6d3d0;
+    padding: 24px;
+    text-align: center;
+    font-size: 0.75rem;
+    color: #706d65;
+    margin-top: 40px;
+  }
+
+  /* Badge */
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+  .badge-blue   { background: #e8f4fd; color: #0077c7; }
+  .badge-orange { background: #fff3e0; color: #c06000; }
+
+  h2.page-section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 20px;
+    color: #23221e;
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="inner">
+    <div class="label">PTA 活動改革</div>
+    <h1>第3回 意識調査<br>アンケート結果レポート</h1>
+    <div class="meta">集計対象：全回答者 ／ 発行：2026年4月</div>
+  </div>
+</header>
+
+<!-- Main -->
+<div class="container">
+
+  <!-- Summary -->
+  <div class="summary-grid">
+    <div class="summary-card">
+      <div class="num">304<span class="unit">件</span></div>
+      <div class="desc">有効回答数</div>
+    </div>
+    <div class="summary-card">
+      <div class="num">87.5<span class="unit">%</span></div>
+      <div class="desc">スタイル制の導入に賛成・概ね賛成</div>
+    </div>
+    <div class="summary-card">
+      <div class="num">85.9<span class="unit">%</span></div>
+      <div class="desc">運営の定期的「最適化」に賛成</div>
+    </div>
+  </div>
+
+  <!-- Q1 & Q2 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">Q1</span>
+      <div>
+        <div class="section-title">スタイル制（会員区分の多層化）について</div>
+        <div class="section-subtitle">ライフスタイルに合わせて役割や会費を選べる制度の導入</div>
+      </div>
+    </div>
+    <div class="chart-row">
+      <div class="chart-card">
+        <h3>制度導入への賛否</h3>
+        <div class="q-note">n = 304</div>
+        <div class="chart-wrap">
+          <canvas id="chartQ1"></canvas>
+        </div>
+        <div class="result-highlight">
+          <strong>87.5%</strong> が「賛成」または「概ね賛成」と回答。制度の方向性は広く支持されています。
+        </div>
+      </div>
+      <div class="chart-card">
+        <h3>希望するスタイル（現時点の意向）</h3>
+        <div class="q-note">n = 304</div>
+        <div class="chart-wrap">
+          <canvas id="chartQ2"></canvas>
+        </div>
+        <div class="result-highlight">
+          最多は<strong>スタンダード（45.1%）</strong>。次いでサポーターA（25.0%）で、積極参加より柔軟な関わりを望む声が多数。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">Q2</span>
+      <div>
+        <div class="section-title">サポーターA の会費設定（7,200円）について</div>
+        <div class="section-subtitle">「活動なし・会費で応援」枠の金額設定（基本の2倍）</div>
+      </div>
+    </div>
+    <div class="chart-row">
+      <div class="chart-card">
+        <h3>7,200円という金額への評価</h3>
+        <div class="q-note">n = 304</div>
+        <div class="chart-wrap">
+          <canvas id="chartQ3"></canvas>
+        </div>
+        <div class="result-highlight">
+          「やや高い（5,400円希望）」が<strong>39.8%</strong>で最多。「妥当」27.6%と意見が分かれており、金額水準の再検討余地があります。
+        </div>
+      </div>
+      <div class="chart-card" style="display:flex;flex-direction:column;justify-content:center;">
+        <h3 style="margin-bottom:20px;">💡 参考：各選択肢の票数</h3>
+        <div class="bar-summary">
+          <div class="bar-row">
+            <div class="bar-label">やや高い（5,400円が望ましい）</div>
+            <div class="bar-track"><div class="bar-fill" style="width:39.8%;background:#ff9100;"></div></div>
+            <div class="bar-pct">39.8%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">妥当（7,200円で良い）</div>
+            <div class="bar-track"><div class="bar-fill" style="width:27.6%;background:#00c4cc;"></div></div>
+            <div class="bar-pct">27.6%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">わからない・おまかせ</div>
+            <div class="bar-track"><div class="bar-fill" style="width:20.1%;background:#aaa69f;"></div></div>
+            <div class="bar-pct">20.1%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">反対（差をつけるべきでない）</div>
+            <div class="bar-track"><div class="bar-fill" style="width:11.2%;background:#e65537;"></div></div>
+            <div class="bar-pct">11.2%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">その他</div>
+            <div class="bar-track"><div class="bar-fill" style="width:1.3%;background:#d6d3d0;"></div></div>
+            <div class="bar-pct">1.3%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q4 & Q5 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">Q3</span>
+      <div>
+        <div class="section-title">リーダー特典・ティーチャースタイルについて</div>
+        <div class="section-subtitle">役員経験者の永久免除制度 ／ 教職員の会費免除での会員参加</div>
+      </div>
+    </div>
+    <div class="chart-row">
+      <div class="chart-card">
+        <h3>リーダー特典と「解任・剥奪」ルール</h3>
+        <div class="q-note">役員1年で永久免除（レジェンド）となる制度　n = 304</div>
+        <div class="chart-wrap">
+          <canvas id="chartQ4"></canvas>
+        </div>
+        <div class="result-highlight">
+          「賛成」が<strong>42.8%</strong>。「反対」23.4%も一定数あり、ボランティア活動への厳格なルール適用に慎重な意見もみられます。
+        </div>
+      </div>
+      <div class="chart-card">
+        <h3>ティーチャースタイル（教職員）の導入</h3>
+        <div class="q-note">先生を会費免除・労働なしで会員として迎える　n = 304</div>
+        <div class="chart-wrap">
+          <canvas id="chartQ5"></canvas>
+        </div>
+        <div class="result-highlight">
+          <strong>65.8%</strong> が賛成。先生の働き方改革への理解が高く、パートナーとして迎える方針は支持されています。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q6: Multiple choice -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">Q4</span>
+      <div>
+        <div class="section-title">人員不足・予算余剰時に優先すべき対応</div>
+        <div class="section-subtitle">複数回答可 ／ n = 304</div>
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="font-size:0.857rem;font-weight:700;margin-bottom:4px;">各選択肢への支持率（複数回答）</h3>
+      <div class="q-note" style="margin-bottom:20px;">※各回答者が複数選択できるため、合計は100%を超えます</div>
+      <div class="chart-wrap-bar">
+        <canvas id="chartQ6"></canvas>
+      </div>
+      <div class="result-highlight" style="margin-top:16px;">
+        「ニーズの低い行事・会議の削減」が<strong>67.8%</strong>で断トツの1位。次いで「学校清掃の外注（47.4%）」「会費・事業の見直し（46.7%）」が続き、まず不要な活動を整理することへの期待が最も高い結果となりました。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q7 & Q8 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">Q5</span>
+      <div>
+        <div class="section-title">外部委託ルール・非会員ルールについて</div>
+        <div class="section-subtitle">3年契約ルール（癒着防止）／ 非会員の権利・サービス区別</div>
+      </div>
+    </div>
+    <div class="chart-row">
+      <div class="chart-card">
+        <h3>外部委託「3年契約ルール」（癒着防止）</h3>
+        <div class="q-note">n = 304</div>
+        <div class="chart-wrap">
+          <canvas id="chartQ7"></canvas>
+        </div>
+        <div class="result-highlight">
+          「賛成」<strong>49.3%</strong>、「おまかせ」43.1%。積極的な反対は<strong>7.6%</strong>のみで、透明性確保への姿勢は概ね受け入れられています。
+        </div>
+      </div>
+      <div class="chart-card">
+        <h3>非会員を選んだ場合のルール</h3>
+        <div class="q-note">記念品自前・アプリ不可・保険対象外など　n = 304</div>
+        <div class="chart-wrap">
+          <canvas id="chartQ8"></canvas>
+        </div>
+        <div class="result-highlight">
+          「納得した」が<strong>66.4%</strong>。会員費で運営されている以上の区別として理解されています。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">Q6</span>
+      <div>
+        <div class="section-title">運営の「最適化」（数年ごとの会費・定員の見直し）</div>
+        <div class="section-subtitle">状況に合わせた柔軟な運用方針への賛否</div>
+      </div>
+    </div>
+    <div class="chart-row">
+      <div class="chart-card">
+        <h3>定期的な最適化への賛否</h3>
+        <div class="q-note">n = 304</div>
+        <div class="chart-wrap">
+          <canvas id="chartQ9"></canvas>
+        </div>
+        <div class="result-highlight">
+          <strong>85.9%</strong> が賛成と圧倒的な支持。「状況に合わせて柔軟に変える方が健全」という考えが広く共有されています。
+        </div>
+      </div>
+      <div class="chart-card" style="display:flex;flex-direction:column;justify-content:center;align-items:center;gap:24px;">
+        <div style="text-align:center;">
+          <div style="font-size:4rem;font-weight:700;color:#0077c7;line-height:1;">85.9%</div>
+          <div style="font-size:0.857rem;color:#706d65;margin-top:4px;">が定期最適化に「賛成」</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:2.5rem;font-weight:700;color:#aaa69f;line-height:1;">13.8%</div>
+          <div style="font-size:0.857rem;color:#706d65;margin-top:4px;">「わからない・おまかせ」</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:1.5rem;font-weight:700;color:#e65537;line-height:1;">0.3%</div>
+          <div style="font-size:0.857rem;color:#706d65;margin-top:4px;">「固定すべき」（1件）</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Free comments -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">💬</span>
+      <div>
+        <div class="section-title">保護者からのご意見・ご感想（抜粋）</div>
+        <div class="section-subtitle">自由回答 47件より代表的なコメントをご紹介します</div>
+      </div>
+    </div>
+    <div class="comment-grid">
+      <div class="comment-card">
+        かなり色々なことを考えてくださり、ありがとうございます。たとえ初年度にうまくいかないことがあったとしても、変えていく努力をしていただけることが素晴らしい取り組みで、ありがたいです。
+        <div><span class="comment-tag positive">感謝・支持</span></div>
+      </div>
+      <div class="comment-card">
+        周囲の学校がPTAを廃止する中、継続していただきありがとうございます。PTAは学校で何か問題があった時の監視・抑止力にもなる存在であり、少子化の流れに合わせ都度最適化させながら継続できますよう一連の検討を支持します。
+        <div><span class="comment-tag positive">感謝・支持</span></div>
+      </div>
+      <div class="comment-card">
+        新しい枠組みに変わったあと、現在ある役員や係などの「一定期間で担う必要がある役割」や「ポイント制」との関係がまだ理解できていないため、新旧の変化を分かりやすく整理いただけると助かります。
+        <div><span class="comment-tag request">情報提供の要望</span></div>
+      </div>
+      <div class="comment-card">
+        PTAは任意加入とはいえ、卒業式のコサージュなど具体的事案をはっきり示せばほとんどの家庭は加入すると思います。正しい情報を具体的にわかりやすく伝えることを今後も宜しくお願いします。
+        <div><span class="comment-tag request">情報発信の要望</span></div>
+      </div>
+      <div class="comment-card">
+        外注にするか否かで問われている内容は、そもそも不要な内容があるのでは？まずはPTAの仕事の「見える化」に努め、それぞれの要否の判断の後に、会費を増やす議論に入れるのではないか。
+        <div><span class="comment-tag concern">建設的な意見</span></div>
+      </div>
+      <div class="comment-card">
+        スタンダード会員のボランティアが任意なら、参加できなければ事実上のサポーターと立ち位置が同じになりますので、敢えて高い金額を出してサポーターになる方がどれだけいるか気になりました。
+        <div><span class="comment-tag concern">制度設計への疑問</span></div>
+      </div>
+      <div class="comment-card">
+        困ったらまた修正すればよいので、まずは現行案でやってほしい。
+        <div><span class="comment-tag positive">スタートへの後押し</span></div>
+      </div>
+      <div class="comment-card">
+        フルタイムの仕事と家事でPTAに参加する時間が取れない場合や、参加したくても家計が厳しくできない場合もあります。その家庭の事情もあるので、一概に細分化するのも難しいのではないかと思いました。
+        <div><span class="comment-tag concern">多様な家庭状況への配慮</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary analysis -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">📊</span>
+      <div>
+        <div class="section-title">総括・運営からのまとめ</div>
+        <div class="section-subtitle">アンケート結果を踏まえた今後の方針</div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:16px;">
+      <p style="font-size:1rem;line-height:1.8;color:#23221e;">
+        今回のアンケートには <strong>304名</strong> の保護者の皆さまからご回答をいただきました。スタイル制の導入については<strong>87.5%</strong>が前向きな評価を示しており、時代に合った運営改革への強い期待が感じられます。一方で、「金額設定の見直し」「制度の分かりやすい説明」「過去の活動への敬意」など、丁寧な対応が求められる声も届いています。皆さまのご意見を最大限に活かし、2026年度の運営に反映してまいります。
+      </p>
+    </div>
+    <div class="analysis-grid">
+      <div class="analysis-item">
+        <div class="analysis-icon blue">✅</div>
+        <div class="analysis-body">
+          <h4>スタイル制：方向性は決定</h4>
+          <p>87.5%の支持を得た。「まず試してから調整」という声も多く、2026年度から導入を進める。</p>
+        </div>
+      </div>
+      <div class="analysis-item">
+        <div class="analysis-icon yellow">💰</div>
+        <div class="analysis-body">
+          <h4>サポーターA会費：再検討の余地あり</h4>
+          <p>7,200円に「やや高い」が約4割。5,400円（1.5倍）を基準に再シミュレーションを行う。</p>
+        </div>
+      </div>
+      <div class="analysis-item">
+        <div class="analysis-icon green">📣</div>
+        <div class="analysis-body">
+          <h4>情報発信の強化が急務</h4>
+          <p>「新旧の違いが分からない」「非会員のデメリットが不明」など説明不足の声あり。Q&A・比較表の整備を行う。</p>
+        </div>
+      </div>
+      <div class="analysis-item">
+        <div class="analysis-icon red">🔄</div>
+        <div class="analysis-body">
+          <h4>まず「活動の見直し」から</h4>
+          <p>最優先は「不要な行事・会議の削減（67.8%）」。外注より先に活動の要否を棚卸しすることを重視する。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  本レポートは第3回意識調査アンケート（回答期間：2026年度）の集計結果をまとめたものです。<br>
+  個人が特定される情報は一切含まれておりません。ご質問はPTA役員までお問い合わせください。
+</div>
+
+<script>
+// SmartHR chart colors
+const COLORS = {
+  blue:   '#2d7df0',
+  teal:   '#00c4cc',
+  orange: '#ff9100',
+  red:    '#e65537',
+  navy:   '#2d4b9b',
+  yellow: '#ffcd00',
+  gray:   '#aaa69f',
+  green:  '#4bb47d',
+  lightBlue: '#69d7ff',
+};
+
+const defaultOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      position: 'right',
+      labels: {
+        font: { size: 11, family: 'AdjustedYuGothic, "Yu Gothic", YuGothic, sans-serif' },
+        padding: 8,
+        boxWidth: 14,
+        boxHeight: 14,
+      }
+    },
+    tooltip: {
+      callbacks: {
+        label: ctx => ` ${ctx.label}: ${ctx.raw}件 (${((ctx.raw/304)*100).toFixed(1)}%)`
+      }
+    }
+  }
+};
+
+// Q1: スタイル制
+new Chart(document.getElementById('chartQ1'), {
+  type: 'pie',
+  data: {
+    labels: ['概ね賛成', '賛成', 'どちらとも言えない', '反対'],
+    datasets: [{
+      data: [157, 109, 32, 6],
+      backgroundColor: [COLORS.blue, COLORS.teal, COLORS.yellow, COLORS.red],
+      borderWidth: 2,
+      borderColor: '#fff'
+    }]
+  },
+  options: { ...defaultOptions }
+});
+
+// Q2: 希望スタイル
+new Chart(document.getElementById('chartQ2'), {
+  type: 'doughnut',
+  data: {
+    labels: ['スタンダード', 'サポーターA', '悩んでいる', 'レジェンド', '非会員', 'リーダー'],
+    datasets: [{
+      data: [137, 76, 46, 36, 6, 3],
+      backgroundColor: [COLORS.blue, COLORS.teal, COLORS.yellow, COLORS.green, COLORS.gray, COLORS.orange],
+      borderWidth: 2,
+      borderColor: '#fff'
+    }]
+  },
+  options: { ...defaultOptions }
+});
+
+// Q3: サポーターA会費
+new Chart(document.getElementById('chartQ3'), {
+  type: 'pie',
+  data: {
+    labels: ['やや高い（5,400円）', '妥当（7,200円）', 'わからない', '反対（差不要）', 'その他'],
+    datasets: [{
+      data: [121, 84, 61, 34, 4],
+      backgroundColor: [COLORS.orange, COLORS.teal, COLORS.gray, COLORS.red, '#d6d3d0'],
+      borderWidth: 2,
+      borderColor: '#fff'
+    }]
+  },
+  options: { ...defaultOptions }
+});
+
+// Q4: リーダー特典・責任
+new Chart(document.getElementById('chartQ4'), {
+  type: 'pie',
+  data: {
+    labels: ['賛成', 'わからない', '反対'],
+    datasets: [{
+      data: [130, 103, 71],
+      backgroundColor: [COLORS.blue, COLORS.gray, COLORS.red],
+      borderWidth: 2,
+      borderColor: '#fff'
+    }]
+  },
+  options: { ...defaultOptions }
+});
+
+// Q5: ティーチャースタイル
+new Chart(document.getElementById('chartQ5'), {
+  type: 'pie',
+  data: {
+    labels: ['賛成', 'わからない', '反対'],
+    datasets: [{
+      data: [200, 94, 10],
+      backgroundColor: [COLORS.teal, COLORS.gray, COLORS.red],
+      borderWidth: 2,
+      borderColor: '#fff'
+    }]
+  },
+  options: { ...defaultOptions }
+});
+
+// Q6: 複数回答 - 横棒
+new Chart(document.getElementById('chartQ6'), {
+  type: 'bar',
+  data: {
+    labels: [
+      '【廃止】ニーズの低い行事・会議の削減',
+      '【外注】学校清掃・美化のプロ委託',
+      '【運用】会費の金額調整・事業の見直し',
+      '【外注】会計・事務のプロ委託',
+      '【外注】地域見守り・安全確保の委託',
+      '【外注】行事設営・力仕事の委託',
+    ],
+    datasets: [{
+      label: '回答件数',
+      data: [206, 144, 142, 127, 91, 89],
+      backgroundColor: [
+        COLORS.navy,
+        COLORS.blue,
+        COLORS.teal,
+        COLORS.green,
+        COLORS.lightBlue,
+        COLORS.yellow,
+      ],
+      borderRadius: 4,
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: ctx => ` ${ctx.raw}件 (${((ctx.raw/304)*100).toFixed(1)}%)`
+        }
+      }
+    },
+    scales: {
+      x: {
+        beginAtZero: true,
+        max: 250,
+        ticks: { font: { size: 11 } },
+        grid: { color: '#edebe8' }
+      },
+      y: {
+        ticks: {
+          font: { size: 11, family: 'AdjustedYuGothic, "Yu Gothic", YuGothic, sans-serif' },
+        },
+        grid: { display: false }
+      }
+    }
+  }
+});
+
+// Q7: 3年契約ルール
+new Chart(document.getElementById('chartQ7'), {
+  type: 'pie',
+  data: {
+    labels: ['賛成', 'わからない', '反対'],
+    datasets: [{
+      data: [150, 131, 23],
+      backgroundColor: [COLORS.blue, COLORS.gray, COLORS.red],
+      borderWidth: 2,
+      borderColor: '#fff'
+    }]
+  },
+  options: { ...defaultOptions }
+});
+
+// Q8: 非会員ルール
+new Chart(document.getElementById('chartQ8'), {
+  type: 'pie',
+  data: {
+    labels: ['納得した', 'わからない', '反対', 'その他'],
+    datasets: [{
+      data: [202, 75, 16, 11],
+      backgroundColor: [COLORS.teal, COLORS.gray, COLORS.red, '#d6d3d0'],
+      borderWidth: 2,
+      borderColor: '#fff'
+    }]
+  },
+  options: { ...defaultOptions }
+});
+
+// Q9: 最適化
+new Chart(document.getElementById('chartQ9'), {
+  type: 'doughnut',
+  data: {
+    labels: ['賛成（柔軟に変える）', 'わからない', '反対（固定すべき）'],
+    datasets: [{
+      data: [261, 42, 1],
+      backgroundColor: [COLORS.blue, COLORS.gray, COLORS.red],
+      borderWidth: 2,
+      borderColor: '#fff'
+    }]
+  },
+  options: {
+    ...defaultOptions,
+    cutout: '65%',
+    plugins: {
+      ...defaultOptions.plugins,
+      tooltip: {
+        callbacks: {
+          label: ctx => ` ${ctx.label}: ${ctx.raw}件 (${((ctx.raw/304)*100).toFixed(1)}%)`
+        }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>
