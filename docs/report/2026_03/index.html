@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PTA意識調査 第1〜3回 まとめレポート</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  @font-face { font-family: AdjustedYuGothic; font-weight: 400; src: local("Yu Gothic Medium"); }
+  @font-face { font-family: AdjustedYuGothic; font-weight: 700; src: local("Yu Gothic Bold"); }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: AdjustedYuGothic, "Yu Gothic", YuGothic, "Hiragino Sans", sans-serif; font-size: 16px; line-height: 1.5; color: #23221e; background: #f8f7f6; }
+  .site-header { background: #23221e; color: #fff; padding: 32px 0; }
+  .site-header .inner { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+  .site-header .label { font-size: 0.857rem; letter-spacing: 0.1rem; opacity: 0.75; margin-bottom: 8px; }
+  .site-header h1 { font-size: 2rem; font-weight: 700; line-height: 1.25; margin-bottom: 8px; }
+  .site-header .meta { font-size: 0.857rem; opacity: 0.75; }
+  .nav-bar { background: #111; padding: 0 24px; display: flex; justify-content: center; gap: 4px; }
+  .nav-bar a { display: inline-block; padding: 10px 18px; color: rgba(255,255,255,0.65); font-size: 0.857rem; text-decoration: none; border-bottom: 3px solid transparent; }
+  .nav-bar a.active { color: #fff; border-bottom-color: #00c4cc; font-weight: 700; }
+  .nav-bar a:hover { color: #fff; }
+  .container { max-width: 960px; margin: 0 auto; padding: 40px 24px; }
+
+  /* Timeline */
+  .timeline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-bottom: 40px; position: relative; }
+  .timeline::before { content: ''; position: absolute; top: 32px; left: 16.67%; right: 16.67%; height: 2px; background: #d6d3d0; z-index: 0; }
+  .tl-item { text-align: center; position: relative; z-index: 1; }
+  .tl-dot { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-size: 0.75rem; font-weight: 700; color: #fff; }
+  .tl-dot-1 { background: #2d7df0; }
+  .tl-dot-2 { background: #0077c7; }
+  .tl-dot-3 { background: #005fa3; }
+  .tl-num { font-size: 1.5rem; font-weight: 700; line-height: 1; display: block; }
+  .tl-label { font-size: 0.857rem; color: #706d65; }
+  .tl-theme { font-size: 0.75rem; color: #23221e; font-weight: 700; margin-top: 4px; line-height: 1.4; }
+  .tl-n { font-size: 0.75rem; color: #aaa69f; margin-top: 2px; }
+
+  /* KPI grid */
+  .kpi-section { margin-bottom: 40px; }
+  .kpi-section h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid #23221e; }
+  .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .kpi-card { background: #fff; border: 1px solid #d6d3d0; border-radius: 6px; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+  .kpi-card .round { font-size: 0.75rem; font-weight: 700; color: #fff; background: #0077c7; border-radius: 12px; padding: 2px 10px; display: inline-block; margin-bottom: 8px; }
+  .kpi-card .round.r1 { background: #2d7df0; }
+  .kpi-card .round.r2 { background: #0077c7; }
+  .kpi-card .round.r3 { background: #005fa3; }
+  .kpi-card .pct { font-size: 2.2rem; font-weight: 700; color: #23221e; line-height: 1.1; }
+  .kpi-card .pct-label { font-size: 0.75rem; color: #706d65; margin-top: 4px; line-height: 1.4; }
+  .kpi-card .trend { font-size: 0.75rem; margin-top: 8px; padding: 4px 8px; border-radius: 4px; display: inline-block; }
+  .trend-up { background: #e8f5e9; color: #2a7a2a; }
+  .trend-stable { background: #f8f7f6; color: #706d65; }
+
+  /* Section */
+  .section { margin-bottom: 40px; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid #0077c7; }
+  .section-icon { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: #0077c7; color: #fff; border-radius: 8px; font-size: 1rem; flex-shrink: 0; }
+  .section-title { font-size: 1.2rem; font-weight: 700; line-height: 1.4; color: #23221e; }
+  .section-subtitle { font-size: 0.857rem; color: #706d65; margin-top: 2px; }
+  .card { background: #fff; border: 1px solid #d6d3d0; border-radius: 6px; padding: 24px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+  .chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+  .chart-card { background: #fff; border: 1px solid #d6d3d0; border-radius: 6px; padding: 24px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+  .chart-card h3 { font-size: 0.857rem; font-weight: 700; color: #23221e; margin-bottom: 4px; line-height: 1.4; }
+  .q-note { font-size: 0.75rem; color: #706d65; margin-bottom: 16px; }
+  .chart-wrap { position: relative; height: 220px; }
+  .chart-wrap-lg { position: relative; height: 300px; }
+  .result-highlight { background: #f8f7f6; border-left: 4px solid #0077c7; border-radius: 0 6px 6px 0; padding: 12px 16px; margin-top: 16px; font-size: 0.857rem; color: #23221e; }
+  .result-highlight strong { color: #0077c7; font-size: 1rem; }
+
+  /* Insight cards */
+  .insight-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+  .insight-card { display: flex; gap: 12px; padding: 16px; background: #fff; border: 1px solid #d6d3d0; border-radius: 6px; }
+  .insight-icon { width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+  .insight-icon.blue { background: #e8f4fd; }
+  .insight-icon.green { background: #e8f5e9; }
+  .insight-icon.yellow { background: #fffde7; }
+  .insight-icon.teal { background: #e0f7fa; }
+  .insight-icon.orange { background: #fff3e0; }
+  .insight-icon.red { background: #fce4ec; }
+  .insight-body h4 { font-size: 0.857rem; font-weight: 700; margin-bottom: 4px; color: #23221e; }
+  .insight-body p { font-size: 0.857rem; color: #706d65; line-height: 1.5; }
+
+  /* Roadmap */
+  .roadmap { display: flex; flex-direction: column; gap: 0; }
+  .roadmap-item { display: flex; gap: 0; }
+  .roadmap-left { width: 120px; flex-shrink: 0; text-align: right; padding: 0 16px 24px 0; }
+  .roadmap-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: 700; color: #fff; }
+  .roadmap-center { width: 24px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; }
+  .roadmap-dot { width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+  .roadmap-line { flex: 1; width: 2px; background: #d6d3d0; margin: 4px 0; }
+  .roadmap-right { flex: 1; padding: 0 0 24px 16px; }
+  .roadmap-right h4 { font-size: 0.857rem; font-weight: 700; color: #23221e; margin-bottom: 4px; }
+  .roadmap-right p { font-size: 0.857rem; color: #706d65; line-height: 1.5; }
+
+  /* Footer */
+  .footer { background: #edebe8; border-top: 1px solid #d6d3d0; padding: 24px; text-align: center; font-size: 0.75rem; color: #706d65; margin-top: 40px; }
+  .footer a { color: #0071c1; }
+
+  /* Response trend */
+  .response-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: 0.857rem; }
+  .response-label { width: 60px; font-weight: 700; flex-shrink: 0; }
+  .response-track { flex: 1; background: #edebe8; border-radius: 4px; height: 28px; overflow: hidden; }
+  .response-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 10px; color: #fff; font-size: 0.75rem; font-weight: 700; }
+  .response-n { width: 60px; text-align: right; color: #706d65; flex-shrink: 0; }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <div class="label">PTA 活動改革 ／ 総括レポート</div>
+    <h1>意識調査 第1〜3回<br>まとめレポート</h1>
+    <div class="meta">対象期間：2025〜2026年度 ／ 総回答数 930件 ／ 発行：2026年4月</div>
+  </div>
+</header>
+<nav class="nav-bar">
+  <a href="report001.html">第1回</a>
+  <a href="report002.html">第2回</a>
+  <a href="report003.html">第3回</a>
+  <a href="index.html" class="active">1〜3回まとめ</a>
+</nav>
+<div class="container">
+
+  <!-- Timeline -->
+  <div class="section">
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot tl-dot-1"><span class="tl-num">1</span>回</div>
+        <div class="tl-theme">任意性の認知<br>参加形態のニーズ<br>デジタル化の意向</div>
+        <div class="tl-n">n = 308</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot tl-dot-2"><span class="tl-num">2</span>回</div>
+        <div class="tl-theme">集金の独立運営<br>ツール選定<br>入会ルール設計</div>
+        <div class="tl-n">n = 318</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot tl-dot-3"><span class="tl-num">3</span>回</div>
+        <div class="tl-theme">スタイル制の詳細<br>会費設定・外注方針<br>最適化の賛否</div>
+        <div class="tl-n">n = 304</div>
+      </div>
+    </div>
+
+    <!-- 回答者数推移 -->
+    <div class="card">
+      <div style="font-size:0.857rem;font-weight:700;margin-bottom:16px;">回答者数の推移</div>
+      <div class="response-bar">
+        <div class="response-label">第1回</div>
+        <div class="response-track"><div class="response-fill" style="width:96.9%;background:#2d7df0;">308件</div></div>
+        <div class="response-n">308件</div>
+      </div>
+      <div class="response-bar">
+        <div class="response-label">第2回</div>
+        <div class="response-track"><div class="response-fill" style="width:100%;background:#0077c7;">318件</div></div>
+        <div class="response-n">318件</div>
+      </div>
+      <div class="response-bar">
+        <div class="response-label">第3回</div>
+        <div class="response-track"><div class="response-fill" style="width:95.6%;background:#005fa3;">304件</div></div>
+        <div class="response-n">304件</div>
+      </div>
+      <div style="margin-top:12px;font-size:0.857rem;color:#706d65;">3回合計：<strong style="color:#23221e;font-size:1rem;">930件</strong>　／　1回平均：310件　／　回答数は安定して維持されています</div>
+    </div>
+  </div>
+
+  <!-- KPI比較 -->
+  <div class="kpi-section">
+    <h2>📈 各回のキーKPI</h2>
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="round r1">第1回</div>
+        <div class="pct">84.1%</div>
+        <div class="pct-label">柔軟な参加形態を「必要・あっても良い」</div>
+        <span class="trend trend-up">→ 第3回でスタイル制87.5%支持へ</span>
+      </div>
+      <div class="kpi-card">
+        <div class="round r1">第1回</div>
+        <div class="pct">80.8%</div>
+        <div class="pct-label">デジタル（がくぷり）集約に賛成・大賛成</div>
+        <span class="trend trend-up">→ 第2回でがくぷり67%支持に繋がる</span>
+      </div>
+      <div class="kpi-card">
+        <div class="round r1">第1回</div>
+        <div class="pct">45.8%</div>
+        <div class="pct-label">運営の透明性・改善の必要性を感じる</div>
+        <span class="trend trend-stable">改善要望は一貫して存在</span>
+      </div>
+      <div class="kpi-card">
+        <div class="round r2">第2回</div>
+        <div class="pct">70.4%</div>
+        <div class="pct-label">集金独立運営に賛成・条件付き賛成</div>
+        <span class="trend trend-up">手数料の透明化を条件に支持</span>
+      </div>
+      <div class="kpi-card">
+        <div class="round r2">第2回</div>
+        <div class="pct">67.0%</div>
+        <div class="pct-label">「がくぷり」活用を支持</div>
+        <span class="trend trend-stable">既存基盤の活用を選択</span>
+      </div>
+      <div class="kpi-card">
+        <div class="round r2">第2回</div>
+        <div class="pct">79.3%</div>
+        <div class="pct-label">自動辞退ルールに賛成・条件付き賛成</div>
+        <span class="trend trend-stable">リマインド通知が前提</span>
+      </div>
+      <div class="kpi-card">
+        <div class="round r3">第3回</div>
+        <div class="pct">87.5%</div>
+        <div class="pct-label">スタイル制の導入に賛成・概ね賛成</div>
+        <span class="trend trend-up">全設問で最高の支持率</span>
+      </div>
+      <div class="kpi-card">
+        <div class="round r3">第3回</div>
+        <div class="pct">85.9%</div>
+        <div class="pct-label">数年ごとの「最適化」に賛成</div>
+        <span class="trend trend-up">継続的改善への強い支持</span>
+      </div>
+      <div class="kpi-card">
+        <div class="round r3">第3回</div>
+        <div class="pct">65.8%</div>
+        <div class="pct-label">ティーチャースタイル（教職員）導入に賛成</div>
+        <span class="trend trend-stable">先生との協働関係を支持</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- テーマ1: デジタル化 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">📱</span>
+      <div>
+        <div class="section-title">テーマ① デジタル化への移行</div>
+        <div class="section-subtitle">第1回（意向）→ 第2回（ツール選定）という段階的な合意形成</div>
+      </div>
+    </div>
+    <div class="chart-row">
+      <div class="chart-card">
+        <h3>デジタル化支持率の変化</h3>
+        <div class="q-note">第1回：がくぷり集約への賛否　第2回：がくぷり活用の選択</div>
+        <div class="chart-wrap"><canvas id="chartDigital"></canvas></div>
+        <div class="result-highlight">
+          第1回で80.8%が「デジタル化賛成」と回答し、第2回では67.0%が具体的に「がくぷり活用」を選択。意向から決定へとスムーズに移行しました。
+        </div>
+      </div>
+      <div class="chart-card" style="display:flex;flex-direction:column;gap:16px;justify-content:center;">
+        <div style="font-size:0.857rem;font-weight:700;">デジタル化の段階的な議論の流れ</div>
+        <div class="roadmap">
+          <div class="roadmap-item">
+            <div class="roadmap-left"><span class="roadmap-badge" style="background:#2d7df0;">第1回</span></div>
+            <div class="roadmap-center"><div class="roadmap-dot" style="background:#2d7df0;"></div><div class="roadmap-line"></div></div>
+            <div class="roadmap-right"><h4>デジタル化の意向確認</h4><p>80.8%が「がくぷり集約に賛成」。紙の廃止ニーズが明確に。</p></div>
+          </div>
+          <div class="roadmap-item">
+            <div class="roadmap-left"><span class="roadmap-badge" style="background:#0077c7;">第2回</span></div>
+            <div class="roadmap-center"><div class="roadmap-dot" style="background:#0077c7;"></div><div class="roadmap-line"></div></div>
+            <div class="roadmap-right"><h4>ツール選定・集金方法の決定</h4><p>67%が「がくぷり」を選択。新規登録不要・クレカ対応が決め手。</p></div>
+          </div>
+          <div class="roadmap-item">
+            <div class="roadmap-left"><span class="roadmap-badge" style="background:#005fa3;">第3回</span></div>
+            <div class="roadmap-center"><div class="roadmap-dot" style="background:#005fa3;"></div></div>
+            <div class="roadmap-right"><h4>デジタル基盤を前提とした制度設計</h4><p>スタイル制・入会管理・情報発信がすべてデジタル前提で議論。</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- テーマ2: 参加形態 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🏷️</span>
+      <div>
+        <div class="section-title">テーマ② 参加形態の多様化（スタイル制）</div>
+        <div class="section-subtitle">第1回（ニーズ）→ 第3回（制度設計の賛否）という発展</div>
+      </div>
+    </div>
+    <div class="chart-row">
+      <div class="chart-card">
+        <h3>第1回：希望する関わり方（複数回答）</h3>
+        <div class="q-note">第1回 n = 308</div>
+        <div class="chart-wrap"><canvas id="chartStyle1"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <h3>第3回：希望するスタイル（現時点の意向）</h3>
+        <div class="q-note">第3回 n = 304</div>
+        <div class="chart-wrap"><canvas id="chartStyle3"></canvas></div>
+      </div>
+    </div>
+    <div class="card">
+      <div style="font-size:0.857rem;font-weight:700;margin-bottom:12px;">第1回→第3回：参加スタイルの対応関係</div>
+      <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;font-size:0.857rem;">
+        <div style="padding:12px;background:#e8f4fd;border-radius:6px;"><strong>賛助会員</strong><br><span style="color:#706d65;">活動は難しいが会費で支援</span><br><strong style="color:#0077c7;">55.5%</strong></div>
+        <div style="color:#aaa69f;font-size:1.2rem;">→</div>
+        <div style="padding:12px;background:#e8f4fd;border-radius:6px;"><strong>サポーターA</strong><br><span style="color:#706d65;">活動時間は出せないが会費で応援</span><br><strong style="color:#0077c7;">25.0%</strong></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;font-size:0.857rem;margin-top:12px;">
+        <div style="padding:12px;background:#f0f9f0;border-radius:6px;"><strong>一般会員・サポーター会員</strong><br><span style="color:#706d65;">役職なし・単発で協力</span><br><strong style="color:#2a7a2a;">45〜42%</strong></div>
+        <div style="color:#aaa69f;font-size:1.2rem;">→</div>
+        <div style="padding:12px;background:#f0f9f0;border-radius:6px;"><strong>スタンダード</strong><br><span style="color:#706d65;">できる時だけボランティア候補</span><br><strong style="color:#2a7a2a;">45.1%</strong></div>
+      </div>
+      <div class="result-highlight" style="margin-top:16px;">
+        第1回で示された多様な参加ニーズが、第3回では「スタイル制」という具体的な制度に集約され、<strong>87.5%</strong>の支持を獲得しました。
+      </div>
+    </div>
+  </div>
+
+  <!-- テーマ3: 外注・最適化 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🔄</span>
+      <div>
+        <div class="section-title">テーマ③ 外注化・スリム化・最適化</div>
+        <div class="section-subtitle">第1回（外注化ニーズ）→ 第3回（具体的施策への賛否）</div>
+      </div>
+    </div>
+    <div class="chart-row">
+      <div class="chart-card">
+        <h3>第3回：人員不足時に優先すべき対応（複数回答）</h3>
+        <div class="q-note">第3回 n = 304</div>
+        <div class="chart-wrap-lg"><canvas id="chartOutsource"></canvas></div>
+        <div class="result-highlight">
+          「不要な行事・会議の削減」が<strong>67.8%</strong>でトップ。第1回での「ベルマーク廃止」「不要な活動をやめてほしい」という声が、具体的な設問として結実しました。
+        </div>
+      </div>
+      <div class="chart-card">
+        <h3>第3回：定期的な「最適化」への賛否</h3>
+        <div class="q-note">第3回 n = 304</div>
+        <div class="chart-wrap"><canvas id="chartOptimize"></canvas></div>
+        <div class="result-highlight">
+          <strong>85.9%</strong>が「状況に合わせて柔軟に変える方が健全」と回答。3回を通じた継続的改革への保護者の支持が確認されました。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 総合総括 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">📝</span>
+      <div>
+        <div class="section-title">3回を通じた総合総括</div>
+        <div class="section-subtitle">930件の回答から見えた保護者の総意</div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:16px;">
+      <p style="font-size:1rem;line-height:1.9;">
+        3回の意識調査を通じて、合計<strong>930件</strong>もの回答をいただきました。調査全体を振り返ると、保護者の意向は一貫して「<strong>無理なく・柔軟に・透明に</strong>」というキーワードに集約されます。任意加入の認知向上から始まり、デジタル化ツールの選定、そしてスタイル制という会員多様化へと、段階的に具体化してきた改革の方向性に対し、毎回80〜90%台の高い支持が示されています。今後は「情報発信の充実」と「運用しながらの微調整」が鍵となります。
+      </p>
+    </div>
+    <div class="insight-grid">
+      <div class="insight-card">
+        <div class="insight-icon blue">✅</div>
+        <div class="insight-body">
+          <h4>改革の方向性は全体で支持</h4>
+          <p>スタイル制87.5%、最適化85.9%など。3回を通じて保護者の改革支持は揺るがなかった。</p>
+        </div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-icon green">📱</div>
+        <div class="insight-body">
+          <h4>デジタル化は第1回から一貫して支持</h4>
+          <p>80.8%（第1回）→がくぷり選択67%（第2回）と、具体策への移行もスムーズに進んだ。</p>
+        </div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-icon yellow">💰</div>
+        <div class="insight-body">
+          <h4>会費・コスト感覚は慎重</h4>
+          <p>サポーターA会費「やや高い（40%）」など、金額設定は慎重な意見が多い。透明な説明が必要。</p>
+        </div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-icon teal">📢</div>
+        <div class="insight-body">
+          <h4>情報発信・説明の充実が継続課題</h4>
+          <p>「制度が分からない」「具体的に示してほしい」という声が3回を通じて一貫。Q&Aや比較表の整備を。</p>
+        </div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-icon orange">♻️</div>
+        <div class="insight-body">
+          <h4>不要な活動の廃止ニーズは強い</h4>
+          <p>「ベルマーク廃止」「前例だけで続く行事の削減（67.8%）」など、活動のスリム化要望は一貫。</p>
+        </div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-icon red">🤝</div>
+        <div class="insight-body">
+          <h4>過去の活動への敬意も大切に</h4>
+          <p>「変革しながら過去の努力を尊重してほしい」という声も。改革の丁寧なコミュニケーションを。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 自由回答インサイト -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">💬</span>
+      <div>
+        <div class="section-title">自由回答から見えた保護者の声（151件）</div>
+        <div class="section-subtitle">3回分の自由回答を横断的に分析。繰り返し出てきたテーマと代表的なコメントをまとめます。</div>
+      </div>
+    </div>
+
+    <!-- ① キーワード頻度チャート -->
+    <div class="card" style="margin-bottom:24px;">
+      <div style="font-size:0.857rem;font-weight:700;margin-bottom:4px;">① 3回を通じて繰り返し出てきたテーマ（自由回答 延べ件数）</div>
+      <div class="q-note" style="margin-bottom:20px;">各コメントに含まれるキーワードで分類。1件のコメントが複数テーマに該当する場合あり。</div>
+      <div style="position:relative;height:320px;"><canvas id="chartKeywords"></canvas></div>
+    </div>
+
+    <!-- ② カテゴリ別の声 -->
+    <div style="font-size:0.857rem;font-weight:700;margin-bottom:12px;">② カテゴリ別の代表的なコメント</div>
+
+    <!-- 感謝・支持 -->
+    <div style="margin-bottom:20px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+        <span style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:#e8f4fd;border-radius:50%;font-size:0.857rem;">👏</span>
+        <span style="font-weight:700;font-size:1rem;color:#23221e;">感謝・支持</span>
+        <span style="font-size:0.75rem;color:#706d65;">─ 3回合計 40件（全体の26.5%）</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+        <div style="background:#fff;border:1px solid #d6d3d0;border-radius:6px;padding:16px;border-top:3px solid #2d7df0;">
+          <div style="font-size:0.75rem;font-weight:700;color:#2d7df0;margin-bottom:8px;">第1回</div>
+          <div style="font-size:0.857rem;line-height:1.7;color:#23221e;">「改革を進めていただきありがとうございます。お忙しい中運営に携わっている方々には感謝しかありません」</div>
+        </div>
+        <div style="background:#fff;border:1px solid #d6d3d0;border-radius:6px;padding:16px;border-top:3px solid #0077c7;">
+          <div style="font-size:0.75rem;font-weight:700;color:#0077c7;margin-bottom:8px;">第2回</div>
+          <div style="font-size:0.857rem;line-height:1.7;color:#23221e;">「諸々、建設的なご検討、本当にありがとうございます。特にありません。運営にお任せします」</div>
+        </div>
+        <div style="background:#fff;border:1px solid #d6d3d0;border-radius:6px;padding:16px;border-top:3px solid #005fa3;">
+          <div style="font-size:0.75rem;font-weight:700;color:#005fa3;margin-bottom:8px;">第3回</div>
+          <div style="font-size:0.857rem;line-height:1.7;color:#23221e;">「たとえ初年度にうまくいかないことがあったとしても、変えていく努力をしていただけることが素晴らしい。困ったらまた修正すればよいので、まずは現行案でやってほしい」</div>
+        </div>
+      </div>
+      <div style="margin-top:10px;padding:10px 14px;background:#e8f4fd;border-radius:6px;font-size:0.857rem;color:#23221e;">
+        <strong>示唆：</strong>回を追うごとに「支持・感謝」の声が増加（第1回10件→第3回19件）。具体的な制度が見えてくるほど保護者の共感が深まっています。
+      </div>
+    </div>
+
+    <!-- 制度への疑問 -->
+    <div style="margin-bottom:20px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+        <span style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:#fffde7;border-radius:50%;font-size:0.857rem;">❓</span>
+        <span style="font-weight:700;font-size:1rem;color:#23221e;">制度への疑問・不安</span>
+        <span style="font-size:0.75rem;color:#706d65;">─ 情報発信・透明性・公平性に関する声</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+        <div style="background:#fff;border:1px solid #d6d3d0;border-radius:6px;padding:16px;border-top:3px solid #2d7df0;">
+          <div style="font-size:0.75rem;font-weight:700;color:#2d7df0;margin-bottom:8px;">第1回</div>
+          <div style="font-size:0.857rem;line-height:1.7;color:#23221e;">「PTAの全貌が中々見えておりません。どのような役職があり、どのような活動をされているのか。フルタイムの仕事でも参加できるのか、かなり不透明です」</div>
+        </div>
+        <div style="background:#fff;border:1px solid #d6d3d0;border-radius:6px;padding:16px;border-top:3px solid #0077c7;">
+          <div style="font-size:0.75rem;font-weight:700;color:#0077c7;margin-bottom:8px;">第2回</div>
+          <div style="font-size:0.857rem;line-height:1.7;color:#23221e;">「未納額が増えた場合に今まで出来ていた支援はできなくなるということを最初にはっきり説明すれば良いと思います。払っている人と払っていない人の扱いを明確に」</div>
+        </div>
+        <div style="background:#fff;border:1px solid #d6d3d0;border-radius:6px;padding:16px;border-top:3px solid #005fa3;">
+          <div style="font-size:0.75rem;font-weight:700;color:#005fa3;margin-bottom:8px;">第3回</div>
+          <div style="font-size:0.857rem;line-height:1.7;color:#23221e;">「新しい枠組みに変わったあと、現在ある役員や係・ポイント制との関係がまだ理解できていない。新旧の変化を分かりやすく整理いただけると助かります」</div>
+        </div>
+      </div>
+      <div style="margin-top:10px;padding:10px 14px;background:#fffde7;border-radius:6px;font-size:0.857rem;color:#23221e;">
+        <strong>示唆：</strong>疑問の内容が回を経て変化しています。第1回は「PTAとは何か」という基礎的疑問→第2回は「お金のルール」→第3回は「新旧制度の移行期の混乱」。段階的な情報発信が効果的です。
+      </div>
+    </div>
+
+    <!-- 改善提案 -->
+    <div style="margin-bottom:20px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+        <span style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:#e8f5e9;border-radius:50%;font-size:0.857rem;">💡</span>
+        <span style="font-weight:700;font-size:1rem;color:#23221e;">改善提案</span>
+        <span style="font-size:0.75rem;color:#706d65;">─ 3回を通じて最も多様な声が集まったカテゴリ</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+        <div style="background:#fff;border:1px solid #d6d3d0;border-radius:6px;padding:16px;border-top:3px solid #2d7df0;">
+          <div style="font-size:0.75rem;font-weight:700;color:#2d7df0;margin-bottom:8px;">第1回</div>
+          <div style="font-size:0.857rem;line-height:1.7;color:#23221e;">「ベルマーク廃止」「清掃は業者へ」「役割をしない代わりに会費を多く払う選択肢がほしい」「自宅でできる作業を増やしてほしい」</div>
+        </div>
+        <div style="background:#fff;border:1px solid #d6d3d0;border-radius:6px;padding:16px;border-top:3px solid #0077c7;">
+          <div style="font-size:0.75rem;font-weight:700;color:#0077c7;margin-bottom:8px;">第2回</div>
+          <div style="font-size:0.857rem;line-height:1.7;color:#23221e;">「コンビニ払いも選択肢に」「入金状況をアプリで確認できるように」「会費規模に応じて活動内容を事前に明示してほしい」</div>
+        </div>
+        <div style="background:#fff;border:1px solid #d6d3d0;border-radius:6px;padding:16px;border-top:3px solid #005fa3;">
+          <div style="font-size:0.75rem;font-weight:700;color:#005fa3;margin-bottom:8px;">第3回</div>
+          <div style="font-size:0.857rem;line-height:1.7;color:#23221e;">「外注より先にPTAの仕事を見える化して、不要な仕事を洗い出すべき」「役員の癒着防止と同様に、役員任期の上限も設けるべき」「サポーターA会費は5,400円が妥当」</div>
+        </div>
+      </div>
+      <div style="margin-top:10px;padding:10px 14px;background:#e8f5e9;border-radius:6px;font-size:0.857rem;color:#23221e;">
+        <strong>示唆：</strong>第1回の「ベルマーク廃止・外注化」といった大きな方向感の提案から、第3回では「金額の具体値・公平性のルール」という精度の高い提案へと深化しています。保護者の当事者意識が高まっていることの表れです。
+      </div>
+    </div>
+
+    <!-- ③ 繰り返し出た声 -->
+    <div style="font-size:0.857rem;font-weight:700;margin-bottom:12px;">③ 3回を通じて一貫して出てきた声（継続課題）</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px;">
+      <div style="background:#fff;border:1px solid #e01e5a;border-radius:6px;padding:16px;">
+        <div style="font-size:0.75rem;font-weight:700;color:#e01e5a;margin-bottom:6px;">🔴 役員・係の負担感（3回合計45件・最多）</div>
+        <div style="font-size:0.857rem;line-height:1.7;color:#23221e;">「強制的な選出をやめてほしい」「フルタイムで働いていると平日の活動は無理」「役割をしない代わりに会費を多く払う選択肢を」という声が3回すべてに登場。スタイル制はこの声への直接的な回答です。</div>
+      </div>
+      <div style="background:#fff;border:1px solid #ff9900;border-radius:6px;padding:16px;">
+        <div style="font-size:0.75rem;font-weight:700;color:#c06000;margin-bottom:6px;">🟠 活動内容の「見える化」要求（3回を通じて継続）</div>
+        <div style="font-size:0.857rem;line-height:1.7;color:#23221e;">「PTAが何をしているかわからない」「会費の使い道が不明」「不要な仕事を洗い出してから会費論議を」。デジタル化が進んでも、コンテンツの透明性向上は引き続き課題です。</div>
+      </div>
+      <div style="background:#fff;border:1px solid #0077c7;border-radius:6px;padding:16px;">
+        <div style="font-size:0.75rem;font-weight:700;color:#0077c7;margin-bottom:6px;">🔵 子どものことを軸に判断したい（20件）</div>
+        <div style="font-size:0.857rem;line-height:1.7;color:#23221e;">「自分の子どもが不利益を被るかどうかが一番の関心事」「子どもが楽しく生活できるなら手伝いたい」。入会判断の動機は常に「子どものため」であり、非会員デメリットの具体的な提示が加入促進に直結します。</div>
+      </div>
+      <div style="background:#fff;border:1px solid #4bb47d;border-radius:6px;padding:16px;">
+        <div style="font-size:0.75rem;font-weight:700;color:#2a7a2a;margin-bottom:6px;">🟢 過去の活動・改革者への敬意（第3回に集中・4件）</div>
+        <div style="font-size:0.857rem;line-height:1.7;color:#23221e;">「過去役員でがんばった身としては現会長による過去ディスりが刺さった」「改革はありがたいが過去の活動には敬意を示しながら進めてほしい」。変革コミュニケーションに丁寧さが求められています。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 各回レポートリンク -->
+  <div class="section">
+    <div class="card">
+      <div style="font-size:0.857rem;font-weight:700;margin-bottom:16px;">各回の詳細レポートを見る</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
+        <a href="report001.html" style="display:block;padding:16px;background:#f8f7f6;border:1px solid #d6d3d0;border-radius:6px;text-decoration:none;color:#23221e;">
+          <div style="font-size:0.75rem;color:#706d65;margin-bottom:4px;">第1回</div>
+          <div style="font-weight:700;">任意性・参加形態・デジタル化</div>
+          <div style="font-size:0.75rem;color:#0077c7;margin-top:4px;">n = 308 →</div>
+        </a>
+        <a href="report002.html" style="display:block;padding:16px;background:#f8f7f6;border:1px solid #d6d3d0;border-radius:6px;text-decoration:none;color:#23221e;">
+          <div style="font-size:0.75rem;color:#706d65;margin-bottom:4px;">第2回</div>
+          <div style="font-weight:700;">集金独立・ツール選定・入会ルール</div>
+          <div style="font-size:0.75rem;color:#0077c7;margin-top:4px;">n = 318 →</div>
+        </a>
+        <a href="report003.html" style="display:block;padding:16px;background:#f8f7f6;border:1px solid #d6d3d0;border-radius:6px;text-decoration:none;color:#23221e;">
+          <div style="font-size:0.75rem;color:#706d65;margin-bottom:4px;">第3回</div>
+          <div style="font-weight:700;">スタイル制・会費設定・最適化</div>
+          <div style="font-size:0.75rem;color:#0077c7;margin-top:4px;">n = 304 →</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  本レポートは第1〜3回意識調査アンケートの集計結果を総括したものです。個人が特定される情報は一切含まれておりません。<br>
+  ご質問はPTA役員までお問い合わせください。
+</div>
+
+<script>
+const C = { blue:'#2d7df0', teal:'#00c4cc', orange:'#ff9100', red:'#e65537', navy:'#2d4b9b', yellow:'#ffcd00', gray:'#aaa69f', green:'#4bb47d', lb:'#69d7ff', dk:'#005fa3' };
+const opts = { responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'right', labels:{ font:{size:11}, padding:8, boxWidth:14, boxHeight:14 } } } };
+
+// デジタル化比較
+new Chart(document.getElementById('chartDigital'), { type:'bar', data:{
+  labels:['第1回：デジタル集約への賛成', '第2回：がくぷり活用の選択'],
+  datasets:[
+    { label:'賛成・支持', data:[80.8, 67.0], backgroundColor:[C.blue, C.dk], borderRadius:4 },
+    { label:'その他・不支持', data:[19.2, 33.0], backgroundColor:['#edebe8','#edebe8'], borderRadius:4 }
+  ]
+}, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'bottom', labels:{font:{size:11},padding:8,boxWidth:14,boxHeight:14} }, tooltip:{ callbacks:{ label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}%` }}}, scales:{ x:{ stacked:true, grid:{display:false}, ticks:{font:{size:11}} }, y:{ stacked:true, max:100, ticks:{ callback: v => v+'%', font:{size:11}}, grid:{color:'#edebe8'} } } }});
+
+// 第1回参加スタイル
+new Chart(document.getElementById('chartStyle1'), { type:'doughnut', data:{
+  labels:['賛助会員（会費で支援）','一般会員（協力・議決）','サポーター（単発）','非会員','わからない','運営メンバー'],
+  datasets:[{ data:[171,139,129,33,19,5], backgroundColor:[C.blue,C.teal,C.green,C.red,C.gray,C.orange], borderWidth:2, borderColor:'#fff' }]
+}, options:{...opts, cutout:'50%', plugins:{...opts.plugins, tooltip:{ callbacks:{ label: ctx => ` ${ctx.label}: ${ctx.raw}件 (${(ctx.raw/308*100).toFixed(1)}%)` }}}}});
+
+// 第3回参加スタイル
+new Chart(document.getElementById('chartStyle3'), { type:'doughnut', data:{
+  labels:['スタンダード','サポーターA','悩んでいる','レジェンド','非会員','リーダー'],
+  datasets:[{ data:[137,76,46,36,6,3], backgroundColor:[C.blue,C.teal,C.green,C.gray,C.red,C.orange], borderWidth:2, borderColor:'#fff' }]
+}, options:{...opts, cutout:'50%', plugins:{...opts.plugins, tooltip:{ callbacks:{ label: ctx => ` ${ctx.label}: ${ctx.raw}件 (${(ctx.raw/304*100).toFixed(1)}%)` }}}}});
+
+// 外注化
+new Chart(document.getElementById('chartOutsource'), { type:'bar', data:{
+  labels:['【廃止】ニーズの低い行事・会議の削減','【外注】学校清掃・美化のプロ委託','【運用】会費の金額調整・事業見直し','【外注】会計・事務のプロ委託','【外注】地域見守り・安全確保','【外注】行事設営・力仕事'],
+  datasets:[{ label:'回答件数', data:[206,144,142,127,91,89], backgroundColor:[C.navy,C.blue,C.teal,C.green,C.lb,C.yellow], borderRadius:4 }]
+}, options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: ctx => ` ${ctx.raw}件 (${(ctx.raw/304*100).toFixed(1)}%)` }}}, scales:{ x:{ beginAtZero:true, max:250, grid:{color:'#edebe8'}, ticks:{font:{size:11}} }, y:{ ticks:{font:{size:11}}, grid:{display:false} } } }});
+
+// キーワード頻度（積み上げ横棒）
+new Chart(document.getElementById('chartKeywords'), { type:'bar', data:{
+  labels:[
+    '役員・係の負担',
+    '感謝・ありがとう',
+    '会費・金額',
+    '改革への支持',
+    '活動の削減・廃止',
+    '子どものため',
+    'ベルマーク廃止',
+    '共働き・時間が取れない',
+    'デジタル・アプリ',
+    '外注・外部委託',
+    '強制・任意加入',
+    '情報発信・説明不足',
+  ],
+  datasets:[
+    { label:'第1回', data:[22,10,11,5,14,9,16,9,5,7,10,5], backgroundColor:'#2d7df0', borderRadius:0 },
+    { label:'第2回', data:[13,11,7,11,7,2,0,1,9,0,0,2], backgroundColor:'#0077c7', borderRadius:0 },
+    { label:'第3回', data:[10,19,14,13,6,9,1,7,2,6,3,5], backgroundColor:'#005fa3', borderRadius:4 },
+  ]
+}, options:{
+  indexAxis:'y', responsive:true, maintainAspectRatio:false,
+  plugins:{ legend:{ position:'bottom', labels:{ font:{size:11}, padding:12, boxWidth:14, boxHeight:14 }},
+    tooltip:{ callbacks:{ label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}件` }}},
+  scales:{
+    x:{ stacked:true, grid:{color:'#edebe8'}, ticks:{font:{size:11}}, max:50 },
+    y:{ stacked:true, ticks:{font:{size:11}}, grid:{display:false} }
+  }
+}});
+
+// 最適化
+new Chart(document.getElementById('chartOptimize'), { type:'doughnut', data:{
+  labels:['賛成（柔軟に変える方が健全）','わからない','反対（固定すべき）'],
+  datasets:[{ data:[261,42,1], backgroundColor:[C.blue,C.gray,C.red], borderWidth:2, borderColor:'#fff' }]
+}, options:{...opts, cutout:'60%', plugins:{...opts.plugins, tooltip:{ callbacks:{ label: ctx => ` ${ctx.label}: ${ctx.raw}件 (${(ctx.raw/304*100).toFixed(1)}%)` }}}}});
+</script>
+</body>
+</html>
