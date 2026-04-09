@@ -352,6 +352,50 @@
     margin-bottom: 20px;
     color: #23221e;
   }
+
+  /* 自由回答 */
+  .fc-search-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .fc-search-bar input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #d6d3d0;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+    outline: none;
+  }
+  .fc-search-bar input:focus { border: 2px solid #0077c7; }
+  #fc-count { font-size: 0.857rem; color: #706d65; white-space: nowrap; }
+  .fc-list { display: flex; flex-direction: column; gap: 10px; }
+  .fc-card {
+    display: flex;
+    gap: 12px;
+    background: #fff;
+    border: 1px solid #d6d3d0;
+    border-radius: 6px;
+    padding: 14px 16px;
+    font-size: 0.857rem;
+    line-height: 1.7;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .fc-card.hidden { display: none; }
+  .fc-card.highlight { border-color: #0077c7; background: #f0f7ff; }
+  .fc-num {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #aaa69f;
+    min-width: 28px;
+    padding-top: 2px;
+    flex-shrink: 0;
+  }
+  .fc-text { color: #23221e; }
+  .fc-text mark { background: #fff176; border-radius: 2px; padding: 0 2px; }
+
 </style>
 </head>
 <body>
@@ -694,6 +738,212 @@
 </div>
 
 <!-- Footer -->
+
+  <!-- 全自由回答 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">📝</span>
+      <div>
+        <div class="section-title">自由記述 全件（47件）</div>
+        <div class="section-subtitle">空白回答を除く全コメントを掲載しています</div>
+      </div>
+    </div>
+    <div class="fc-search-bar">
+      <input type="text" id="fc-search" placeholder="キーワードで絞り込む…" oninput="filterComments()" />
+      <span id="fc-count">47件表示中</span>
+    </div>
+    <div class="fc-list" id="fc-list">
+      
+        <div class="fc-card" id="fc-1">
+          <div class="fc-num">#1</div>
+          <div class="fc-text">かなり色々なことを考えてくださり、ありがとうございます。<br>たとえ初年度にうまくいかないのとがあったとしても、変えていく努力をしていただけることが素晴らしい取り組みで、ありがたいです。</div>
+        </div>
+        <div class="fc-card" id="fc-2">
+          <div class="fc-num">#2</div>
+          <div class="fc-text">周囲の学校がPTAを廃止する中、継続していただきありがとうございます。<br>PTAは学校とともに歩む一方、学校で何か問題があった時の監視・抑止力にもなる存在であり、簡単に廃止してはならないと思っています。<br>少子化の流れに合わせ都度最適化させながら継続できますよう、一連の検討を支持します。</div>
+        </div>
+        <div class="fc-card" id="fc-3">
+          <div class="fc-num">#3</div>
+          <div class="fc-text">ペアレンツティーチャーアソシエーションとは言うものの、子供たちが学校の授業だけでは学べないこと（予算の管理と運営など）を体験できるような組織にできたらみんな進んで参加するかもな、とか勝手にコメントしてみる。日本初のPTCA（ペアレンツティーチャーチャイルドアソシエーション）みたいな</div>
+        </div>
+        <div class="fc-card" id="fc-4">
+          <div class="fc-num">#4</div>
+          <div class="fc-text">PTAの存在意義がいまいちよく分かっておりせん。入会しないことのデメリットを具体的に教えてほしい（記念品が貰えないとか？）</div>
+        </div>
+        <div class="fc-card" id="fc-5">
+          <div class="fc-num">#5</div>
+          <div class="fc-text">今と未来のための変革、ありがとうございます。</div>
+        </div>
+        <div class="fc-card" id="fc-6">
+          <div class="fc-num">#6</div>
+          <div class="fc-text">会員の会費で運営されている以上、非会員は個別対応になるのは当然の区別だと思うが、会員と非会員の情報管理、記念品等の注文でPTA役員の仕事が増えそう。外注も良し悪しがあるので、ちゃんと協議を重ねた上で慎重にしてほしい。</div>
+        </div>
+        <div class="fc-card" id="fc-7">
+          <div class="fc-num">#7</div>
+          <div class="fc-text">新しい会員の枠組みに変わったあと、現在ある役員や係などの「一定期間で担う必要がある役割」や「ポイント制」との関係がまだ理解できていないため、分かりやすく新旧の変化を整理いただけるととても助かります。</div>
+        </div>
+        <div class="fc-card" id="fc-8">
+          <div class="fc-num">#8</div>
+          <div class="fc-text">前会長の加藤さんからいろいろ変わってきて、現会長はじめ活動してくださっている方はとても大変だと思います。ありがとうございます。何かあればできるだけ手伝いたいという気持ちでいます。今後もよろしくお願いします。</div>
+        </div>
+        <div class="fc-card" id="fc-9">
+          <div class="fc-num">#9</div>
+          <div class="fc-text">困ったらまた修正すればよいので、まずは現行案でやってほしい</div>
+        </div>
+        <div class="fc-card" id="fc-10">
+          <div class="fc-num">#10</div>
+          <div class="fc-text">自分の子どもが不利益を被るかどうかが保護者の一番の関心事だと思うので、PTAは任意加入とはいえ、卒業式のコサージュなど具体的事案をはっきり示せばほとんどの家庭は加入すると思います。具体的な事実を伝えずただ任意加入というのは混乱を招くため、正しい情報を具体的にわかりやすく伝えることを今後も宜しくお願いします。</div>
+        </div>
+        <div class="fc-card" id="fc-11">
+          <div class="fc-num">#11</div>
+          <div class="fc-text">よろしくお願いします。</div>
+        </div>
+        <div class="fc-card" id="fc-12">
+          <div class="fc-num">#12</div>
+          <div class="fc-text">今の時代に合わせて改革されて素敵だなと思います！ありがとうございます。<br>人手が足りない時、係をしていなくても声をかけてくださればお手伝いできる保護者もいると思います。私もレジェンドで免除ですが、予定が合えばお手伝いしますので、こちらのアプリでお声がけしていただければと思います。</div>
+        </div>
+        <div class="fc-card" id="fc-13">
+          <div class="fc-num">#13</div>
+          <div class="fc-text">外注にするか否かで問われている内容は、そもそも不要な内容であり、見直しが必要だと感じる。もしかしてPTA会員が考えている以上に不要な仕事が多いのでは？まずはPTAの仕事の見える化に努めて、それぞれの要否の判断の後に、会費を増やす増やさないの議論に入れるのではないか。</div>
+        </div>
+        <div class="fc-card" id="fc-14">
+          <div class="fc-num">#14</div>
+          <div class="fc-text">PTAの活動内容をすべて把握できておりませんが、活動はスリム化してよいと思います。変革にはエネルギーが必要だと思いますし、このようなアンケートをいただけることにも感謝しております。引き続きよろしくお願いいたします。</div>
+        </div>
+        <div class="fc-card" id="fc-15">
+          <div class="fc-num">#15</div>
+          <div class="fc-text">いつもありがとうございます！宮前平小学校の為に色々動いてくださって感謝でいっぱいです！</div>
+        </div>
+        <div class="fc-card" id="fc-16">
+          <div class="fc-num">#16</div>
+          <div class="fc-text">リーダー」の特典と責任について<br>1年リーダー（運営役員）を務めれば永久免除（レジェンド）となる一方、「正当な理由なく活動に参加しない場合の解任および特典剥奪」というルールについて、その事由に該当した場合は、ベーシックスタイルになるといった運用が良いかと思います。すでにその考慮であればご放念ください。</div>
+        </div>
+        <div class="fc-card" id="fc-17">
+          <div class="fc-num">#17</div>
+          <div class="fc-text">スタンダード会員のボランティアが任意なら、ボランティアに参加できなければ事実上のサポーターと立ち位置が同じになりますので、敢えて高い金額を出してサポーターになる方がどれだけいるか気になりました。<br>万が一ですが、ボランティアが足りず、サポーターも少なかった場合は、スタンダード会員の会費を上げる、業務縮小が考えられるかもしれません。<br>時代に合った改善案を考え、実行して頂きありがとうございます。</div>
+        </div>
+        <div class="fc-card" id="fc-18">
+          <div class="fc-num">#18</div>
+          <div class="fc-text">経費は一定程度かかる一方、児童数は増減し、世の中値上げ部分も多々あるので、運営については見極めながら見直しながら運営できることが望ましいと思う。</div>
+        </div>
+        <div class="fc-card" id="fc-19">
+          <div class="fc-num">#19</div>
+          <div class="fc-text">改革、大変なご苦労と思われます。<br>この節目に携わっている皆さまに感謝申し上げます。</div>
+        </div>
+        <div class="fc-card" id="fc-20">
+          <div class="fc-num">#20</div>
+          <div class="fc-text">会費2倍や増やす対応には違和感。PTAの費用は活動の必要経費や子供のためでなく活動の人件費にも使われてる使うということでしょうか？ボランティア、任意参加、費用は平等が基本と思ってました。<br><br>非会員の件も少し怖いと感じた。デメリットよく分からず非会員にしちゃったり、途中で加入はどうなるのか等、分からないことが多く子供に不利益ないか怖くなった。<br>もちろん会費払わず利益だけ得るというのは良くないのでそういった点は無くなると良いが、PTA活動にだいぶ不安が増えました。</div>
+        </div>
+        <div class="fc-card" id="fc-21">
+          <div class="fc-num">#21</div>
+          <div class="fc-text">今の時代に合わせた大きな変更に取り組んでくださりありがとうございます。<br>非常に助かります。</div>
+        </div>
+        <div class="fc-card" id="fc-22">
+          <div class="fc-num">#22</div>
+          <div class="fc-text">みんなにとってより良いPTAにするために沢山の取り組みをしてくださり、ありがとうございます。今後とも宜しくお願い致します。</div>
+        </div>
+        <div class="fc-card" id="fc-23">
+          <div class="fc-num">#23</div>
+          <div class="fc-text">PTA活動についてご尽力ありがとうございます。<br><br>「リーダー」の特典と責任について、1年リーダーを務めれば永久免除となる一方、「正当な理由なく活動に参加しない場合の解任および特典剥奪」<br>というルールですが、正当な理由かどうかを判断するのは誰になるのでしょうか。<br><br>また、時間を割き、子ども達のために活動してくださった方にプラスαの特典（例えば卒業式の際の役員優先席の設置や、運動会や学習発表会の時に写真撮影優先席を設けられる等）を設置することで、PTAの役員をする事のメリットを掲げてなり手減少を防ぐ等、金銭での支援をする保護者との区別をしたらどうかと思いました。<br><br>我が家は長女が指定難病もちで、来年度入学する長男は支援級在籍予定のため、継続的なPTAの活動は難しいです。<br>スポットでのお手伝いを5回行ったら1ポイントなど、ご検討頂けたらありがたいなと思っています。</div>
+        </div>
+        <div class="fc-card" id="fc-24">
+          <div class="fc-num">#24</div>
+          <div class="fc-text">金額を一定層に増額する事により金銭支援が増える一方、活動を回す人員が減るために外注を増やすという事であれば、<br>一定層にだけ増額するのではなく、<br>会員一律全員が増額してできる限り、全部外注にした方がいいと思います。その方がみんなが納得出来るし、公平だと思います。</div>
+        </div>
+        <div class="fc-card" id="fc-25">
+          <div class="fc-num">#25</div>
+          <div class="fc-text">外部発注での癒着防止を考えるなら、役員（特に権限の強い会長やお金に関わる会計）も連続でなれる年数を定めるべきと思います。<br>また、先生が非会員となるなら、保険の対象からも外すべきではないか。保険のみ対象にするなら、会費金額を減らすなどはありと思います。</div>
+        </div>
+        <div class="fc-card" id="fc-26">
+          <div class="fc-num">#26</div>
+          <div class="fc-text">PTA撤廃に向けてこの労力を注いで欲しい。<br>こんな長いアンケートより、撤廃に反対か賛成かをシンプルに問うアンケートをなぜ実施しないのか疑問。<br>キラドキ、成人委員の仕事、広報、ベルマークなどいらないものは削って、美化等必要最低限のものを外注すればいいと思う。<br>その為に会費があがるのは構わない。</div>
+        </div>
+        <div class="fc-card" id="fc-27">
+          <div class="fc-num">#27</div>
+          <div class="fc-text">PTA活動の見直しに取り組んで頂き有難うございます！</div>
+        </div>
+        <div class="fc-card" id="fc-28">
+          <div class="fc-num">#28</div>
+          <div class="fc-text">わからない部分もあり、おまかせ回答があってすみません。ご対応ありがとうございます。</div>
+        </div>
+        <div class="fc-card" id="fc-29">
+          <div class="fc-num">#29</div>
+          <div class="fc-text">状況に応じて柔軟に対応するのが望ましいが、PTAの負担にならないか懸念がある。2年ごとに見直しなどとして少しでも今後関わる方の負担軽減になるとよい</div>
+        </div>
+        <div class="fc-card" id="fc-30">
+          <div class="fc-num">#30</div>
+          <div class="fc-text">いつもありがとうございます。</div>
+        </div>
+        <div class="fc-card" id="fc-31">
+          <div class="fc-num">#31</div>
+          <div class="fc-text">いつも色々と PTAの運営の改革を進めていただき ありがとうございます。<br><br>PTAは子供が悲しむ状態になるなら 入会していないとな、とは思います。<br><br>「ﾚｼﾞｪﾝﾄﾞ」とは過去に「長」「ﾘｰﾀﾞｰ」をした事がある人をいうのですか？委員をした人はどの扱いなのでしょうか？</div>
+        </div>
+        <div class="fc-card" id="fc-32">
+          <div class="fc-num">#32</div>
+          <div class="fc-text">PTAの活動をよくわかっていないので、わからないの回答が多くなってしまいました。<br><br>時代に合わせての改革に声をあげていただきありがとうございます！</div>
+        </div>
+        <div class="fc-card" id="fc-33">
+          <div class="fc-num">#33</div>
+          <div class="fc-text">常に改善していくことは大事だと思います。<br>色々とご提案くださりありがとうございます。</div>
+        </div>
+        <div class="fc-card" id="fc-34">
+          <div class="fc-num">#34</div>
+          <div class="fc-text">PTA会費が多く積み上がり過ぎない運営としていただければと思います。</div>
+        </div>
+        <div class="fc-card" id="fc-35">
+          <div class="fc-num">#35</div>
+          <div class="fc-text">協力したくない・お金も払いたくない・でも子ども同士で不公平にしないでほしい　というような保護者も一定数いると思いますが，この改革案が最も公平だと思いますのでぜひ進めていただきたいと思います。ありがとうございます。</div>
+        </div>
+        <div class="fc-card" id="fc-36">
+          <div class="fc-num">#36</div>
+          <div class="fc-text">最初に、ここまで議論してこられた内容や、アンケートでご提案抱いたあれこれには総論賛同しております。以下は、それに加えて…というお話になります。<br><br>(これまで意見出ししてこなかったので)後出しになってしまって非常に申し訳ないのですが、会費の納得感や参加形態の段階性などに対しては、活動内容そのものの納得感のほうが影響が大きいという意見です。PTAは学校教育に保護者も関わり互助互恵の精神で活動していくもの、という理解をしております。その視点に立った時、例えばオヤジの会の出店などがどれだけなにに寄与しているのか？正直に言いますと疑問です。<br>例えばですが、公立私立の教育内容を比較してみて、ぜひやりたいが学校予算では対応できない物があった時、PTAの活動費もしくは保護者のボランティア活動でそれを実現するとか、そういったものならば参加意欲も湧くし、予定も調整するでしょうし、会費も進んで払いたいとすら思います。世の中でPTA不要論が出てくるのも貢献の実態が見えないのが一番の原因ではないのでしょうか？今後そうした議論が盛り上がると嬉しいなと思っております。<br><br>会長さんが非常に積極的に変革の議論をリードされているようにお見受けしましたので、率直な意見を書かせていただきました。もし何か不快な言及がございましたら申し訳ありません。なにとぞご容赦ください。</div>
+        </div>
+        <div class="fc-card" id="fc-37">
+          <div class="fc-num">#37</div>
+          <div class="fc-text">すでに在校している子ども分のポイントを取得しているのですが、今まで頑張った分はきちんと今後に反映されるのかどうかが気になります。新たなルールになって、また何か追加でやらなければいけないことは発生しますか？生徒の人数が多いので、ポイントを取得せずに卒業をされる方、いらっしゃるのではないかとずっと疑問です。</div>
+        </div>
+        <div class="fc-card" id="fc-38">
+          <div class="fc-num">#38</div>
+          <div class="fc-text">サポーター区分ごとの人数は年度によって変動すると思うので、毎年同じ金額だと予算が足りなくなったり逆に多すぎるといった事が考えられると思う。<br>事前にサポーター区分の希望を聞いて金額設定を毎年行う必要があると思う。</div>
+        </div>
+        <div class="fc-card" id="fc-39">
+          <div class="fc-num">#39</div>
+          <div class="fc-text">会費について、内容を明確にすることは大事だと思います。<br>PTAのやるべき優先順位を教えていただけるとありがたいです。</div>
+        </div>
+        <div class="fc-card" id="fc-40">
+          <div class="fc-num">#40</div>
+          <div class="fc-text">サポーターAができるととてもありがたいです。清掃は仕事の時間を避けることができるならボランティア参加もできそうだなと思います(外注するほどでは、、という意味でもあります。)</div>
+        </div>
+        <div class="fc-card" id="fc-41">
+          <div class="fc-num">#41</div>
+          <div class="fc-text">運営の皆様おつかれさまです。<br>がくぷりの配信ですが、緊急時をのぞき、夜遅い時間はさけるべきではないかと思います。平日何時〜何時まで、などと配信時間を設定していただけると安心です。</div>
+        </div>
+        <div class="fc-card" id="fc-42">
+          <div class="fc-num">#42</div>
+          <div class="fc-text">ありがとうございます！</div>
+        </div>
+        <div class="fc-card" id="fc-43">
+          <div class="fc-num">#43</div>
+          <div class="fc-text">過去役員で頑張った身としては、現会長による過去ディスりがわりと刺さった1年でした。<br><br>従来通りを守らないといけないとかではなく、回ってきた仕事をこなしているうちにあっという間に任期終了で、改革が必要とかまで面倒見られなかったというのに、なぜここまで言われなきゃならないの？が正直な気持ちです。<br><br>宮前平小学校は任期は1年ですし、過去の会長さんも、不要な役や仕事は頑張って削っておられました。<br><br>積み上がった会費の余剰金の法的な処理やらでなんともならないところもあったと思います。<br><br>とはいえ、改革に文句があるわけではありません。<br>現会長さんには、大いに頑張っていただき、今後、時代と現代の保護者のニーズに合った、何より子どもたちが安心して楽しい小学校生活を送るためのサポーターとしてのPTAを作り上げていってほしいと思います。</div>
+        </div>
+        <div class="fc-card" id="fc-44">
+          <div class="fc-num">#44</div>
+          <div class="fc-text">すでに、ポイント確保のために、早い段階でPTAに携わった人に不公平になるのではないか</div>
+        </div>
+        <div class="fc-card" id="fc-45">
+          <div class="fc-num">#45</div>
+          <div class="fc-text">改革はありがたいですが、過去の活動などには敬意を示しながら進めて欲しいです。<br>あと、説明などにあまりオタクネタを入れないほうがいいと思います。内輪ネタ感が強くなり、そういう雰囲気が苦手と感じる方もいるかと思います</div>
+        </div>
+        <div class="fc-card" id="fc-46">
+          <div class="fc-num">#46</div>
+          <div class="fc-text">母子家庭のような、協力をしたい気持ちはあるがフルタイムの仕事と家事でPTAに参加する時間が取れないや気持ちの余裕がない場合もあります。また、その場合、参加できない分お金を出したい！と思っても、家計が厳しくできないことがあります。<br>その家庭の事情もあるので、一概に細分化するのも難しいのではないか。<br>と思いました。<br>よろしくお願いいたします。</div>
+        </div>
+        <div class="fc-card" id="fc-47">
+          <div class="fc-num">#47</div>
+          <div class="fc-text">業者との癒着、無駄な出費（すみません、歯医者等で開業何周年お祝いの花が送られているのはの何故でしょう？校医さんへ何か特別な配慮が必要なのでしょうか？これは気にしていなかったのですが、耳にしていた噂かと思ったら本当にあって少し違和感を感じ、申し訳ないですが、昔からの悪き習慣のように感じました。<br>特に会計については貴重な子どもたちへの投資ですからきちんとしてもらいたいです。</div>
+        </div>
+    </div>
+  </div>
 <div class="footer">
   本レポートは第3回意識調査アンケート（回答期間：2026年度）の集計結果をまとめたものです。<br>
   個人が特定される情報は一切含まれておりません。ご質問はPTA役員までお問い合わせください。
@@ -919,6 +1169,35 @@ new Chart(document.getElementById('chartQ9'), {
     }
   }
 });
+</script>
+<script>
+
+function filterComments() {
+  const q = document.getElementById('fc-search').value.trim().toLowerCase();
+  const cards = document.querySelectorAll('.fc-card');
+  let shown = 0;
+  cards.forEach(card => {
+    const text = card.querySelector('.fc-text');
+    const orig = text.getAttribute('data-orig') || text.innerText;
+    text.setAttribute('data-orig', orig);
+    if (!q || orig.toLowerCase().includes(q)) {
+      card.classList.remove('hidden');
+      card.classList.toggle('highlight', !!q);
+      if (q) {
+        const re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+        text.innerHTML = orig.replace(re, m => `<mark>${m}</mark>`);
+      } else {
+        text.innerHTML = orig;
+      }
+      shown++;
+    } else {
+      card.classList.add('hidden');
+      card.classList.remove('highlight');
+    }
+  });
+  document.getElementById('fc-count').textContent = shown + '件表示中';
+}
+
 </script>
 </body>
 </html>

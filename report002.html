@@ -59,6 +59,50 @@
   .big-stat .pct { font-size: 3rem; font-weight: 700; line-height: 1.1; }
   .big-stat .lbl { font-size: 0.857rem; color: #706d65; margin-top: 6px; line-height: 1.4; }
   .footer { background: #edebe8; border-top: 1px solid #d6d3d0; padding: 24px; text-align: center; font-size: 0.75rem; color: #706d65; margin-top: 40px; }
+
+  /* 自由回答 */
+  .fc-search-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .fc-search-bar input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #d6d3d0;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+    outline: none;
+  }
+  .fc-search-bar input:focus { border: 2px solid #0077c7; }
+  #fc-count { font-size: 0.857rem; color: #706d65; white-space: nowrap; }
+  .fc-list { display: flex; flex-direction: column; gap: 10px; }
+  .fc-card {
+    display: flex;
+    gap: 12px;
+    background: #fff;
+    border: 1px solid #d6d3d0;
+    border-radius: 6px;
+    padding: 14px 16px;
+    font-size: 0.857rem;
+    line-height: 1.7;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .fc-card.hidden { display: none; }
+  .fc-card.highlight { border-color: #0077c7; background: #f0f7ff; }
+  .fc-num {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #aaa69f;
+    min-width: 28px;
+    padding-top: 2px;
+    flex-shrink: 0;
+  }
+  .fc-text { color: #23221e; }
+  .fc-text mark { background: #fff176; border-radius: 2px; padding: 0 2px; }
+
 </style>
 </head>
 <body>
@@ -269,6 +313,196 @@
   </div>
 </div>
 
+
+  <!-- 全自由回答 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">📝</span>
+      <div>
+        <div class="section-title">自由記述 全件（43件）</div>
+        <div class="section-subtitle">空白回答を除く全コメントを掲載しています</div>
+      </div>
+    </div>
+    <div class="fc-search-bar">
+      <input type="text" id="fc-search" placeholder="キーワードで絞り込む…" oninput="filterComments()" />
+      <span id="fc-count">43件表示中</span>
+    </div>
+    <div class="fc-list" id="fc-list">
+      
+        <div class="fc-card" id="fc-1">
+          <div class="fc-num">#1</div>
+          <div class="fc-text">改革ありがとうございます。よろしくお願いします！</div>
+        </div>
+        <div class="fc-card" id="fc-2">
+          <div class="fc-num">#2</div>
+          <div class="fc-text">色々改革して頂きありがとうございます。</div>
+        </div>
+        <div class="fc-card" id="fc-3">
+          <div class="fc-num">#3</div>
+          <div class="fc-text">あまり無理なく、負荷なくできる活動ができればと思います。色々と大変な中でご検討いただき、本当にありがとうございます。</div>
+        </div>
+        <div class="fc-card" id="fc-4">
+          <div class="fc-num">#4</div>
+          <div class="fc-text">やや不安　としましたが、自分の入金状態をアプリで確認できれば、不安はありません。<br>「入金したっけ？」となることがあるので。。</div>
+        </div>
+        <div class="fc-card" id="fc-5">
+          <div class="fc-num">#5</div>
+          <div class="fc-text">諸々、建設的なご検討、本当にありがとうございます。</div>
+        </div>
+        <div class="fc-card" id="fc-6">
+          <div class="fc-num">#6</div>
+          <div class="fc-text">特にありません。運営にお任せします。宜しくお願い致します。</div>
+        </div>
+        <div class="fc-card" id="fc-7">
+          <div class="fc-num">#7</div>
+          <div class="fc-text">複数人学校が分かれれば、やはり忘れる事や後回しになる案件あり、リマインドは欲しい</div>
+        </div>
+        <div class="fc-card" id="fc-8">
+          <div class="fc-num">#8</div>
+          <div class="fc-text">比較表の作成ありがとうございます。<br>わかりやすく、参考になりました。</div>
+        </div>
+        <div class="fc-card" id="fc-9">
+          <div class="fc-num">#9</div>
+          <div class="fc-text">がくぷりからの決済に賛成ですが、可能であればコンビニ払いもあると嬉しいです</div>
+        </div>
+        <div class="fc-card" id="fc-10">
+          <div class="fc-num">#10</div>
+          <div class="fc-text">未納額が増えると思うが、集金できた額により今まで出来ていた〇〇のような支援はできなくなる　ということを最初にはっきり説明すれば良いと思います。<br>・〇〇円以下だった場合できることは…<br>・〇〇円以上集まれば、…ができる　みたいに。<br>あとは、払った人と払ってない人が不公平感を感じにくい使い道にするしかないかと思います。</div>
+        </div>
+        <div class="fc-card" id="fc-11">
+          <div class="fc-num">#11</div>
+          <div class="fc-text">転校時間の対応(転入時は徴収するのか、転出時は払い戻すのか)あたりもあらかじめ決めておいた方がよさそうですね<br>役員の負担を減らしたいので、どちらも対応しないという整理でいいと思います</div>
+        </div>
+        <div class="fc-card" id="fc-12">
+          <div class="fc-num">#12</div>
+          <div class="fc-text">会長さま<br>ジョジョは3部と6部履修済みなら4部もどうぞ</div>
+        </div>
+        <div class="fc-card" id="fc-13">
+          <div class="fc-num">#13</div>
+          <div class="fc-text">ネット決済は賛成。<br>でも、支払う意思はあるのに、万が一支払いをうっかり忘れてしまったらどうしよう、という不安があります。引き落としは残高さえ確保しておけば未納の心配は無いのでメリットがあります。</div>
+        </div>
+        <div class="fc-card" id="fc-14">
+          <div class="fc-num">#14</div>
+          <div class="fc-text">PTA役員のみが関わることで、不正が行われたとしても、誰も気が付かないのではないかという懸念がある。今までは、先生という第三者が関わっていることで、多少は牽制になっていたと思う。<br>先生と役員の負担を減らすという方向性には賛成。</div>
+        </div>
+        <div class="fc-card" id="fc-15">
+          <div class="fc-num">#15</div>
+          <div class="fc-text">誰も苦しまない為のルールを実行するなら、<br>未納者に連絡する手間はなくなるので、<br>今まで通り学校にお願いで良いと思います。<br>ルールを実行しないなら、仕方なく条件付き手数料で良いかなと思います。<br>本音を言えば、今の物価高の中、たかが300円されど300円なので、100%の気持ちで賛成はできないです。<br>PTAや先生の負担にはなると思いますが、<br>先生の働き方改革も、他にも色々実行されてますし、PTA関連にまで手を出さなくても良いのではないかと思います。</div>
+        </div>
+        <div class="fc-card" id="fc-16">
+          <div class="fc-num">#16</div>
+          <div class="fc-text">小1親ゆえに理解不足なところがありますが、、、<br><br>・コストがかかっても先生方やPTAの負担を減らすことには賛成です。PTA会費は変えずに追加で手数料を払うことを想定していますか？それともPTA会費の中に手数料を含める想定でしょうか？<br><br>・宮小PTAとして、“基本的には加入してほしい”などの基本スタンスを提示したうえで、親または子供のそれぞれの、PTAに加入していないことのデメリットやPTAに加入していることのメリットもわかりやすいとより良いと思いました。</div>
+        </div>
+        <div class="fc-card" id="fc-17">
+          <div class="fc-num">#17</div>
+          <div class="fc-text">どうしても、デジタルよりも紙に親しみのある派です。<br>徴収金忘れはないと思いつつも、ふと抜けがあった際に一度はリマインドをいただきたいです。<br>個別なり、対象者限定なり…</div>
+        </div>
+        <div class="fc-card" id="fc-18">
+          <div class="fc-num">#18</div>
+          <div class="fc-text">PTA会費のアプリでは良いと思います。<br>ただ日々大量のタスクに追われる母達が通知を見逃してしまう事はかなりあり得る事なので、そこをどう見逃さなさいように、、<br>するかの対策は必要な気はします。<br><br>がくぷりからの支払い期限等も学年便りに臨時で記入してもらう？など、、何か見逃さない為の対策があると安心です。</div>
+        </div>
+        <div class="fc-card" id="fc-19">
+          <div class="fc-num">#19</div>
+          <div class="fc-text">いつもご検討いただいてありがとうございます。<br>会費についてですが、リマインド通知等しても漏れてしまう、失念してしまうことはあるかと思います。<br>期限を過ぎた際、または加入を希望しない方は辞退の旨の意思表示ができるシステムがあればいいなと思いました。</div>
+        </div>
+        <div class="fc-card" id="fc-20">
+          <div class="fc-num">#20</div>
+          <div class="fc-text">公式な文書なので、品性を持った文章でお願いします。フランクさや親しみやすさを売りにしたいのか分かりませんが、不愉快ですし、恥ずかしいです。</div>
+        </div>
+        <div class="fc-card" id="fc-21">
+          <div class="fc-num">#21</div>
+          <div class="fc-text">がくぷりを使うのは便利だと思いますが、運用面の比較だけではなく、もう少し、決済システムとしてのセキュリティ面などの評価、比較をしてから、利用する決済システムを選択すべきと考えます。<br>お金の絡む問題なので、追加費用がかかることになっても、そこは慎重に検討すべきだと思います。</div>
+        </div>
+        <div class="fc-card" id="fc-22">
+          <div class="fc-num">#22</div>
+          <div class="fc-text">いつもありがとうございます。</div>
+        </div>
+        <div class="fc-card" id="fc-23">
+          <div class="fc-num">#23</div>
+          <div class="fc-text">会費を支払わなかった場合、PTA入会辞退となるのでしょうか。PTAの入会有無によって何か変わることはありますか？</div>
+        </div>
+        <div class="fc-card" id="fc-24">
+          <div class="fc-num">#24</div>
+          <div class="fc-text">未納者は単に失念しているだけの場合がほとんどなので、2回以上リマインドすべき。"支払拒否ボタン"があると、お互い時間の無駄にならずなお良いのでは。</div>
+        </div>
+        <div class="fc-card" id="fc-25">
+          <div class="fc-num">#25</div>
+          <div class="fc-text">先生や役員が負担にならないようにしてほしい</div>
+        </div>
+        <div class="fc-card" id="fc-26">
+          <div class="fc-num">#26</div>
+          <div class="fc-text">負担を減らすためにツールを使うことは賛成だが、入会辞退が増えることが予想されるため、未入会の家庭の児童への支出が増えることについては賛成できない</div>
+        </div>
+        <div class="fc-card" id="fc-27">
+          <div class="fc-num">#27</div>
+          <div class="fc-text">いつもお世話になっております。</div>
+        </div>
+        <div class="fc-card" id="fc-28">
+          <div class="fc-num">#28</div>
+          <div class="fc-text">不満がある人はちゃんと役員やればよいと思います。<br>役員さん、いつもありがとうございます。</div>
+        </div>
+        <div class="fc-card" id="fc-29">
+          <div class="fc-num">#29</div>
+          <div class="fc-text">手数料がかかっても、先生と保護者の負担を減らしていくことには大賛成です。<br><br>集金の締め切りは忘れる人も多いと思うのでリマインド通知は必要だと思います。<br><br>集金作業をシンプルに簡潔にしていくように、他の仕事でも、誰がどの役員、係になっても負担なく、特別なスキルがなくてもできる状態にすることで、PTAに参加しやすくなるのではないかと思いました。</div>
+        </div>
+        <div class="fc-card" id="fc-30">
+          <div class="fc-num">#30</div>
+          <div class="fc-text">改革の取り組みや発信をいつもありがとうございます！<br>気さくな文章がいつも拝読していて楽しいですし、力になりたいという気持ちが強くなりました。<br>これまで「出来れば関わりたくない」と思っている保護者（もちろん私もその一人でした）に対して、こうしてアンケートなどで気軽に参加出来る形を取ってくださるのはとてもありがたく感じました。<br>これからも応援しています！</div>
+        </div>
+        <div class="fc-card" id="fc-31">
+          <div class="fc-num">#31</div>
+          <div class="fc-text">銀行引き落としで、数千円程度が引き落とせない場合がどれだけあるのか、が焦点かと思います。<br>１意見としては、上記のケースは想定しづらいので数件であればこれまでの運用でいいかと。ルール側をかえて、引き落とせない場合に督促などはあまりせず自動退会にするなど</div>
+        </div>
+        <div class="fc-card" id="fc-32">
+          <div class="fc-num">#32</div>
+          <div class="fc-text">変更すること自体は大賛成です。<br><br>ただ、全体向けでも構わないのでリマインドは複数回する必要はあるのかな？と思います。<br><br>アプリ内完結は便利ではありますが、後回しにして見落とす可能性も高く、リマインドがない状態で「未払い→入会辞退」は少し不安を覚えます。<br>紙ベースが良いと言うわけではなく、簡単とはいえ、全会員がアプリの使用に長けているわけではない、と思うので集金に関しては「苦手な人目線」の救済措置も必要なのかな、と考えます。<br>先生や役員の皆様のご負担を減らすのは大賛成ですが、フォローは必要なのではないかと思います。<br><br>また、<br><br>入会辞退後の再入会希望があった場合はどうするのか<br><br>辞退されたご家庭への対応（イベントや記念品等）をどうするのか<br><br><br>集金方法だけではなく、付随するこの辺りをもう少しご説明いただく必要があるかな？と思います。</div>
+        </div>
+        <div class="fc-card" id="fc-33">
+          <div class="fc-num">#33</div>
+          <div class="fc-text">今回の先生の負担をなくしたいの解が、PTA会費の独立集金になるのでしょうか。独立集金となっても、教材費などの口座振替不能のご家庭がある限り、連絡して納入してもらうことは変わらないと思います。</div>
+        </div>
+        <div class="fc-card" id="fc-34">
+          <div class="fc-num">#34</div>
+          <div class="fc-text">がくぷりで支払う場合の詳細を知りたいです。決済方法の種類、それによる手数料、兄弟数名分まとめて支払い可能なのか、支払い案内はどのように通知されるのか、期日前のリマインドの有無、未払者はだれがどのように把握するのか等</div>
+        </div>
+        <div class="fc-card" id="fc-35">
+          <div class="fc-num">#35</div>
+          <div class="fc-text">意図しない未納となるケースも考慮し、一定の救済措置はあった方がよい。<br>参考までにごれまでの未納率、督促回数、結果(回収できたか)などの実績があると、督促にかかるコストが分かりやすいため、判断の材料にできると良い。</div>
+        </div>
+        <div class="fc-card" id="fc-36">
+          <div class="fc-num">#36</div>
+          <div class="fc-text">親が納付を忘れて自動退会となった場合に子どもが何かの行事等で嫌な思い(自分だけ景品をもらえないなど)が無いようであれば良いと思う。自動退会までには、丁寧な連絡が必要だと考えます。</div>
+        </div>
+        <div class="fc-card" id="fc-37">
+          <div class="fc-num">#37</div>
+          <div class="fc-text">比較検討が大変わかりやすく、納得感もあり助かります。<br>ありがとうございます。</div>
+        </div>
+        <div class="fc-card" id="fc-38">
+          <div class="fc-num">#38</div>
+          <div class="fc-text">手数料が低くて利便性も高いシステムがあるかどうかは、今後も引き続き探して欲しい。</div>
+        </div>
+        <div class="fc-card" id="fc-39">
+          <div class="fc-num">#39</div>
+          <div class="fc-text">督促が来ないからとPTA会費を払わず退会しようと思う方が増えないか不安に感じたため、③項目目をやや不安としました。</div>
+        </div>
+        <div class="fc-card" id="fc-40">
+          <div class="fc-num">#40</div>
+          <div class="fc-text">がくぷりは、これまでの発信ツールとしては問題ないと思うが、決済事業として問題ないのか確認済でしょうか。<br>仮に、未納による退会があった場合、本当に忘れていただけの場合の再入会措置も検討願いたい。</div>
+        </div>
+        <div class="fc-card" id="fc-41">
+          <div class="fc-num">#41</div>
+          <div class="fc-text">全面的に賛同します！<br>ありがとうございます！<br><br>未納の方に督促ではなく何日までに手続きがなければ退会、退会であればどういったことができない？参加できない？などを通知の封書をお送りするとかどうでしょう？<br>この程度ならあまりご負担ないかな、と勝手に思い提案致します。<br>多分今までの通知を読んでいない方はそもそも学校からの連絡に無頓着でまあ関係ないわと思われている方だと思うので、やはり当事者意識でこれを無視したら我が子の学校生活にどんな不利益があるのか提示をしてその上で参加しないということならご本人承知の上で、ということで！みたいな感じはいかがでしょうか？</div>
+        </div>
+        <div class="fc-card" id="fc-42">
+          <div class="fc-num">#42</div>
+          <div class="fc-text">上記自動的に辞退に関しては、あらかじめ入会辞退、入会をしないことに対するメリットデメリットを明確に提示した方が良いかと考えます</div>
+        </div>
+        <div class="fc-card" id="fc-43">
+          <div class="fc-num">#43</div>
+          <div class="fc-text">通知を確認しない側に非はあるとは思うが、期限を過ぎたら自動的に退会、という運営でこども（および保護者）に不利益がないか気になりました。<br>※がくぷりについて根本的な疑問ですが、保護者側のアプリ登録は一名のみなのでしょうか。複数の保護者（例　父、母）が登録しても問題ないのでしょうか。複数名の保護者が登録できた方が、諸々の通知に対するアクション漏れが減らせるのではないかと思いました。</div>
+        </div>
+    </div>
+  </div>
 <div class="footer">
   本レポートは第2回意識調査アンケートの集計結果をまとめたものです。個人が特定される情報は一切含まれておりません。<br>
   <a href="report_summary.html" style="color:#0071c1;">→ 1〜3回まとめレポートを見る</a>
@@ -283,6 +517,36 @@ const tip = () => ({ plugins:{ ...opts.plugins, tooltip:{ callbacks:{ label: ctx
 new Chart(document.getElementById('chartQ1'), { type:'pie', data:{ labels:['賛成（先生の負担をなくすべき）','条件付き賛成（手数料300円以下なら）','どちらでもいい','反対'], datasets:[{ data:[114,110,83,11], backgroundColor:[C.blue,C.teal,C.gray,C.red], borderWidth:2, borderColor:'#fff' }] }, options:{...opts,...tip()} });
 new Chart(document.getElementById('chartQ2'), { type:'doughnut', data:{ labels:['がくぷりを活用','どちらでもいい','他社ツール・独自決済'], datasets:[{ data:[213,101,4], backgroundColor:[C.blue,C.gray,C.red], borderWidth:2, borderColor:'#fff' }] }, options:{...opts, cutout:'60%',...tip()} });
 new Chart(document.getElementById('chartQ3'), { type:'pie', data:{ labels:['賛成（デジタルな割り切りは必要）','やや不安（リマインドがあれば納得）','どちらでもいい','反対（個別に督促すべき）'], datasets:[{ data:[137,115,60,6], backgroundColor:[C.blue,C.yellow,C.gray,C.red], borderWidth:2, borderColor:'#fff' }] }, options:{...opts,...tip()} });
+</script>
+<script>
+
+function filterComments() {
+  const q = document.getElementById('fc-search').value.trim().toLowerCase();
+  const cards = document.querySelectorAll('.fc-card');
+  let shown = 0;
+  cards.forEach(card => {
+    const text = card.querySelector('.fc-text');
+    const orig = text.getAttribute('data-orig') || text.innerText;
+    text.setAttribute('data-orig', orig);
+    if (!q || orig.toLowerCase().includes(q)) {
+      card.classList.remove('hidden');
+      card.classList.toggle('highlight', !!q);
+      // ハイライト
+      if (q) {
+        const re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+        text.innerHTML = orig.replace(re, m => `<mark>${m}</mark>`);
+      } else {
+        text.innerHTML = orig;
+      }
+      shown++;
+    } else {
+      card.classList.add('hidden');
+      card.classList.remove('highlight');
+    }
+  });
+  document.getElementById('fc-count').textContent = shown + '件表示中';
+}
+
 </script>
 </body>
 </html>

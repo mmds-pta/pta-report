@@ -62,6 +62,50 @@
   .analysis-body h4 { font-size: 0.857rem; font-weight: 700; margin-bottom: 4px; color: #23221e; }
   .analysis-body p { font-size: 0.857rem; color: #706d65; line-height: 1.5; }
   .footer { background: #edebe8; border-top: 1px solid #d6d3d0; padding: 24px; text-align: center; font-size: 0.75rem; color: #706d65; margin-top: 40px; }
+
+  /* 自由回答 */
+  .fc-search-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .fc-search-bar input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #d6d3d0;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+    outline: none;
+  }
+  .fc-search-bar input:focus { border: 2px solid #0077c7; }
+  #fc-count { font-size: 0.857rem; color: #706d65; white-space: nowrap; }
+  .fc-list { display: flex; flex-direction: column; gap: 10px; }
+  .fc-card {
+    display: flex;
+    gap: 12px;
+    background: #fff;
+    border: 1px solid #d6d3d0;
+    border-radius: 6px;
+    padding: 14px 16px;
+    font-size: 0.857rem;
+    line-height: 1.7;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .fc-card.hidden { display: none; }
+  .fc-card.highlight { border-color: #0077c7; background: #f0f7ff; }
+  .fc-num {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #aaa69f;
+    min-width: 28px;
+    padding-top: 2px;
+    flex-shrink: 0;
+  }
+  .fc-text { color: #23221e; }
+  .fc-text mark { background: #fff176; border-radius: 2px; padding: 0 2px; }
+
 </style>
 </head>
 <body>
@@ -326,6 +370,268 @@
   </div>
 </div>
 
+
+  <!-- 全自由回答 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">📝</span>
+      <div>
+        <div class="section-title">自由記述 全件（61件）</div>
+        <div class="section-subtitle">空白回答を除く全コメントを掲載しています</div>
+      </div>
+    </div>
+    <div class="fc-search-bar">
+      <input type="text" id="fc-search" placeholder="キーワードで絞り込む…" oninput="filterComments()" />
+      <span id="fc-count">61件表示中</span>
+    </div>
+    <div class="fc-list" id="fc-list">
+      
+        <div class="fc-card" id="fc-1">
+          <div class="fc-num">#1</div>
+          <div class="fc-text">PTA費が高すぎると思います。毎年恒例だからとなんとなく予算を使いきるのではなく、真に子ども達のために必要であるのか検討をお願いします。削れるところがあるのではないかと思います。<br>また、PTAは任意参加と理解していても、現状はほとんどの家庭が加入しており、精神的には半強制だと考えております。自分の子どもが不利益を被らないようにという理由で致し方なくPTAに加入し会費を払っているのが本音です。</div>
+        </div>
+        <div class="fc-card" id="fc-2">
+          <div class="fc-num">#2</div>
+          <div class="fc-text">今はないが、以前の匿名の推薦制度が特に嫌で改善されてほしかった。<br>係にポイントがつかないのが疑問で不満なので改善してほしい。</div>
+        </div>
+        <div class="fc-card" id="fc-3">
+          <div class="fc-num">#3</div>
+          <div class="fc-text">お金を多く払ってもいいので、PTA主催の清掃などは業者さんに任せてもいいと思います。</div>
+        </div>
+        <div class="fc-card" id="fc-4">
+          <div class="fc-num">#4</div>
+          <div class="fc-text">PTAの改善に努めてくださりありがとうございます。<br><br>〇成人委員会が外部講師を招いて行うセミナーがコロナ前はありましたが、生徒数に対して参加者は多くなかったと思います。クラスの懇談会も出席する人が少ない中、今後もそのようなセミナーは不要だと思いました。<br><br>〇広報委員会の編集作業なども、費用負担が多少増えても外部の業者に委託すれば負担が減ると思いました。<br><br>〇各家庭、家庭の事情などで参加が難しい年度もあると思うので、子ども1人につき1年で良いので役員免除の希望が出せると有難いと思いました。私は以前、参加が厳しかった年度に、希望者がいなかった学年委員になってしまい負担を感じました。<br>その年を避けたかったので、前年度までに役員に何度も立候補していましたが、抽選に外れてなれませんでした。<br><br>PTAの仕事が嫌がられるのは、苦手なことを引き受けなくてはいけなかったり、参加が難しいのに無理に参加することになる可能性があるからなのではないかと思います。<br><br>人前に出るのが得意な人、苦手な人、日中参加が厳しい人、参加がしやすい人など、できることがそれぞれ違うと思うので、希望した中から仕事を選ぶことができる、皆が負担なく安心して参加できるPTAになればよいなと思いました。安心感があれば、それぞれできることに積極的に参加できるようになるのではないかと思いました。<br><br>〇旗振りですが、学年特有の忙しい月は担当を外したほうがよいと思いました。<br>学校に慣れない1年生の4.5月や、受験の時期の6年生の1.2月などです。</div>
+        </div>
+        <div class="fc-card" id="fc-5">
+          <div class="fc-num">#5</div>
+          <div class="fc-text">ベルマーク</div>
+        </div>
+        <div class="fc-card" id="fc-6">
+          <div class="fc-num">#6</div>
+          <div class="fc-text">PTAの外部委託など、会費を払って保護者の活動負担がなくなる仕組みを検討していただきたいです。</div>
+        </div>
+        <div class="fc-card" id="fc-7">
+          <div class="fc-num">#7</div>
+          <div class="fc-text">ベルマークはマジでいらない<br>缶のタブもいらない<br>そういうのをうちのPTAやっているかどうか詳しく知りませんが</div>
+        </div>
+        <div class="fc-card" id="fc-8">
+          <div class="fc-num">#8</div>
+          <div class="fc-text">ベルマーク運動はいらないと思います。寄付金制度にしてほしいです。クラウドファンディングとかでも良い気がします。</div>
+        </div>
+        <div class="fc-card" id="fc-9">
+          <div class="fc-num">#9</div>
+          <div class="fc-text">ベルマーク集め</div>
+        </div>
+        <div class="fc-card" id="fc-10">
+          <div class="fc-num">#10</div>
+          <div class="fc-text">PTAがどの様な活動をしているかが不透明な気はする。<br>気軽に参加できる〈お手伝い募集〉などを呼びかけて、都度参加の方が参加しやすい。<br>富士見台小が行っている保護者による読み聞かせや、プールの監視手伝いなど、子供に接する役割ならやりたい人はいそうな気がする。（←富士見台小のは学校からの要請かもしれませんが、、）</div>
+        </div>
+        <div class="fc-card" id="fc-11">
+          <div class="fc-num">#11</div>
+          <div class="fc-text">いつもPTAの運営ありがとうございます。<br>私が情報をとりきれていないのが良くないのですが、正直どのような役職があり、どのような活動をされているのかPTAの全貌が中々見えておりません、、、。そのため、フルタイムの仕事でも参加できるのか、かなり躊躇している部分です。</div>
+        </div>
+        <div class="fc-card" id="fc-12">
+          <div class="fc-num">#12</div>
+          <div class="fc-text">改革を進めていただきありがとうございます。</div>
+        </div>
+        <div class="fc-card" id="fc-13">
+          <div class="fc-num">#13</div>
+          <div class="fc-text">平日の活動は共働きをしている世帯の方は活動が難しいかと思います。活動したい方のみで行いできる範囲で活動するのが良いと思います（抽選などで強制的になどは廃止してほしい）</div>
+        </div>
+        <div class="fc-card" id="fc-14">
+          <div class="fc-num">#14</div>
+          <div class="fc-text">そもそも、PTAに関わったことがない人は、なんの費用や活動がPTAから賄われているか知らないのでは？（会計報告や活動報告をしっかり読み込んでいる人はレアかと。）<br>PTA会費や資源回収協力金を学校の設備改善に使えるようになるとPTAの存在意義がみんなにわかりやすいのでは。<br>DXも便利＆運営委員側の負担は減りますが、関心がある人しか見ない率が、紙より高いのではと思っていますがそのあたりは問題ないでしょうか？<br>PTA加入が任意なのは正しいが、会員から見ればタダ乗りが増えることになるので、そのあたりの対処をどう考えるのか示していただけるとありがたいです。<br>また、会員種別を増やして柔軟に活動に関われるようにするのは理想ですが、それをまとめ上げる運営委員の方の負荷はかえって増えそうで、成り手探しが大変そうなので、運営委員の固定化、任期の長期化につながらないか心配に思いました。<br>任意を全面におしだす場合、そのうち、組織として維持できなくなるのではないかと思いますが、学校側としてはPTAが無くなっても困らないのか知りたいところです。</div>
+        </div>
+        <div class="fc-card" id="fc-15">
+          <div class="fc-num">#15</div>
+          <div class="fc-text">必要な作業は外部委託してもいいと思います。<br>PTAの加入は任意と言っても実際には加入せざるおえず、強制的な役員や係の選出は、各ご家庭のライフスタイルに合わない可能性もあるかと思っております。</div>
+        </div>
+        <div class="fc-card" id="fc-16">
+          <div class="fc-num">#16</div>
+          <div class="fc-text">働いているので、休みをとって頻繁に学校に行かなければならないような形だと参加が難しいです。有休を取れる職場だけではないので、自宅で作業できるようなものが増えると参加しやすいです。</div>
+        </div>
+        <div class="fc-card" id="fc-17">
+          <div class="fc-num">#17</div>
+          <div class="fc-text">PTA外注にする<br>しないなら強制的に手伝わせること(LINEアカウントや電話番号の開示を求めるなど)をやめて欲しい</div>
+        </div>
+        <div class="fc-card" id="fc-18">
+          <div class="fc-num">#18</div>
+          <div class="fc-text">PTA会議室にディスプレイ等の機器やpcがあってもいいと思う。現状個人のスペックに頼らざるを得ず、議事録一つ書くにしても、持ち込み前提、来年のために引き継ぐのも個人次第の側面がある。</div>
+        </div>
+        <div class="fc-card" id="fc-19">
+          <div class="fc-num">#19</div>
+          <div class="fc-text">年間複数回、定期的に関わるということは難しく、単発で参加だとありがたいです。</div>
+        </div>
+        <div class="fc-card" id="fc-20">
+          <div class="fc-num">#20</div>
+          <div class="fc-text">親も集団での活動、コミュニケーションを取るのが苦手な人もいる、点数制とか必ず何かやらないといけないという体制はどうなのかと思う。<br>会費を集めるなら委託して任せても良いのではと思う。</div>
+        </div>
+        <div class="fc-card" id="fc-21">
+          <div class="fc-num">#21</div>
+          <div class="fc-text">役割をしない代わりに、会費を多く払う選択肢があればいいなと思います。</div>
+        </div>
+        <div class="fc-card" id="fc-22">
+          <div class="fc-num">#22</div>
+          <div class="fc-text">お忙しい中運営に携わっている方々には感謝しかありません。子供達が楽しく生活できるのであれば、時間のある時には何かお手伝い出来ればと思います。</div>
+        </div>
+        <div class="fc-card" id="fc-23">
+          <div class="fc-num">#23</div>
+          <div class="fc-text">働いているので、必ず何か担当をしなければいけないや、ポイント制で低い人ほど次に何かやらなければいけない仕組みを無しにして、任意参加にしていただきたい。</div>
+        </div>
+        <div class="fc-card" id="fc-24">
+          <div class="fc-num">#24</div>
+          <div class="fc-text">推薦活動</div>
+        </div>
+        <div class="fc-card" id="fc-25">
+          <div class="fc-num">#25</div>
+          <div class="fc-text">今もあるかは不明ですが、推薦制度は不要だと思います。<br>どのような基準で推薦されているか？など不明なため。</div>
+        </div>
+        <div class="fc-card" id="fc-26">
+          <div class="fc-num">#26</div>
+          <div class="fc-text">ベルマーク係<br>枚数チェックはいいと思いますが、一定枚数ごとに貼る（確かそうしていたはず）のは不要なのではないかと感じました。<br>これがなければ半分どころか1/10ほどの労力で終わると思います</div>
+        </div>
+        <div class="fc-card" id="fc-27">
+          <div class="fc-num">#27</div>
+          <div class="fc-text">宮崎台小学校の様に、イベントごとにお手伝い出来る人を募集して欲しいです。係の仕事を辞退するという項目はなく、強制的に0ポイントのお手伝いが決まる（係が希望通りにならないことも）事に違和感を感じます。せめて0.5ポイントでもあればいいのにと思います。<br>運営委員の係をしたことがあるのですが、お手伝いの回数が多いのに0ポイントは、悲しすぎました。</div>
+        </div>
+        <div class="fc-card" id="fc-28">
+          <div class="fc-num">#28</div>
+          <div class="fc-text">役員推薦の紙の配布、お電話。<br>ベルマークの手間を考えると保護者の寄付で学校に貢献した方が良いと思います。</div>
+        </div>
+        <div class="fc-card" id="fc-29">
+          <div class="fc-num">#29</div>
+          <div class="fc-text">PTAの負担感が保護者からあるのでしたら、外部委託も考えてもよいかもしれません。</div>
+        </div>
+        <div class="fc-card" id="fc-30">
+          <div class="fc-num">#30</div>
+          <div class="fc-text">ベルマーク、校内清掃</div>
+        </div>
+        <div class="fc-card" id="fc-31">
+          <div class="fc-num">#31</div>
+          <div class="fc-text">ポイント制に疑問をもっています。<br>入学時のポイント制のお手紙に面食らい、以降毎年保護者間でポイントがどうのこうのの話になり、辟易しています。<br>どの会員が免除なのか、何ポイントなのか、といった管理も役員の方々の負担になっているのではないでしょうか。<br>先日のアンケートの結果、PTAの役職や委員につける人と全く関われない人が二分しています。<br>卒業までに1人1ポイントというのは構造上不可能ですし、ポイントのためにやらされている感や、PTA活動への負のイメージにつながっているような気がします。<br>回せる人で回し、たとえ役員や委員につかずとも単発でという低いハードルでPTA活動をできるようにするなど、もっと現状にあわせた仕組みにしてほしいです。</div>
+        </div>
+        <div class="fc-card" id="fc-32">
+          <div class="fc-num">#32</div>
+          <div class="fc-text">いつもありがとうございます。<br>時代にあった改革は必要とはいえ、さまざまな人がいますから、なかなか一筋縄にはいかないと思います。<br>役員や係など仕事内容が漠然としてわからない不安があるのではないかと思います。<br>今年度のアプリでの配信はよいアイディアだと思っております。</div>
+        </div>
+        <div class="fc-card" id="fc-33">
+          <div class="fc-num">#33</div>
+          <div class="fc-text">以前PTA役員を務めたときに比べてデジタル化や効率化が進んだと感じます。一方で報告が多くも感じております。読むのが嫌というよりは、作っている方が大変そうだなという思いです。AIを使っているならよいのですが、、</div>
+        </div>
+        <div class="fc-card" id="fc-34">
+          <div class="fc-num">#34</div>
+          <div class="fc-text">PTAの参加を自由入会とした時に運動会などのイベント準備に人が集まらず、実施に影響がでないか心配</div>
+        </div>
+        <div class="fc-card" id="fc-35">
+          <div class="fc-num">#35</div>
+          <div class="fc-text">個人情報を扱うこと自体が不安です。役員の選出についても昔電話が来たことがあるが、知らない人から電話がかかってくること自体不満でした。しょうがないと割り切っていますが、各アプリやシステムの導入も信用していません。<br><br>共働きなのでPTAは本当は加入したくありませんでしたが、子供への不利益が気になり加入しています。入学時に仕事があってもできますと説明がありましたが、実際は平日の時間ですし、夜にしてもその時間があるなら家族との時間に充てたいですしスキルがある人に無償で仕事をさせるのも専業が多かった昔の話だと思います。平日の活動も会社が休みを許してくれるからこそで、全ての企業が寛容な訳ではありません。<br><br>記念品も市販のペン一本程度なら要りません。<br>自分には到底できると思えませんが、率先して活動してくださる皆様や負荷を減らすために動いてくださった会長には感謝しています。</div>
+        </div>
+        <div class="fc-card" id="fc-36">
+          <div class="fc-num">#36</div>
+          <div class="fc-text">ベルマークはもう不要かと思います。</div>
+        </div>
+        <div class="fc-card" id="fc-37">
+          <div class="fc-num">#37</div>
+          <div class="fc-text">紙配布での回答集計<br>PTAカードの紙媒体<br>すべて電子化すれば管理しやすいと思います。</div>
+        </div>
+        <div class="fc-card" id="fc-38">
+          <div class="fc-num">#38</div>
+          <div class="fc-text">ベルマーク集めは不要。</div>
+        </div>
+        <div class="fc-card" id="fc-39">
+          <div class="fc-num">#39</div>
+          <div class="fc-text">PTA刷新を図ってくださりありがとうございます。精査し活動を減らしてはどうか（成人委員やベルマーク）、任意の寄附金を募る、運動会や学校の警備などPTA会費から出せないか？</div>
+        </div>
+        <div class="fc-card" id="fc-40">
+          <div class="fc-num">#40</div>
+          <div class="fc-text">役員選出のための電話活動は不要に感じます。<br>私自身は共働き世帯のため、休日や退勤後こそ家族との時間や休息に充てたいと思っています。<br>今の組織体制や活動内容は、まだ未経験ではある人から見たらやはり負担が大きく出来れば関わりたくない、任意なら入りたくない、と感じてしまいます。<br>ただ、PTAに対して積極的な人や仕事を持っていない人がいるから成り立つ組織であってはいけないとも感じます。<br>共働きだから参加出来ない、共働きじゃないなら手伝うべき、という雰囲気を業務改革を通じて無くして欲しいです。</div>
+        </div>
+        <div class="fc-card" id="fc-41">
+          <div class="fc-num">#41</div>
+          <div class="fc-text">まだ活動自体への理解が浅いため、作業については特に意見がなく申し訳ないです。<br><br>ただ個人的に気になるのは、PTAへの加入状況で、こどもの扱いに差が出ることはあってはならないと思います。<br>例えば、PTAからお祝いにプレゼントしている自由帳をどうするかや、先日も卒業式で胸につける花をどうすべきかが、世間でも話題になっていたかと思います。<br>確かに、金銭が絡む以上、未加入の家庭にPTAからものを配ることへの理解は得にくいと思いますので、こどもに直に見えない形で配布する等の配慮は必要と思います。</div>
+        </div>
+        <div class="fc-card" id="fc-42">
+          <div class="fc-num">#42</div>
+          <div class="fc-text">メンズクラブと協力して、気軽に学校行事に携われるようにした方が良い</div>
+        </div>
+        <div class="fc-card" id="fc-43">
+          <div class="fc-num">#43</div>
+          <div class="fc-text">改善に尽力いただき、感謝しています。思いついたらご提案させていただきます。</div>
+        </div>
+        <div class="fc-card" id="fc-44">
+          <div class="fc-num">#44</div>
+          <div class="fc-text">ベルマーク収集・集計</div>
+        </div>
+        <div class="fc-card" id="fc-45">
+          <div class="fc-num">#45</div>
+          <div class="fc-text">PT Aを運営する全ての人に負担がかからないようになると良いと思う。</div>
+        </div>
+        <div class="fc-card" id="fc-46">
+          <div class="fc-num">#46</div>
+          <div class="fc-text">PTAの参加は自由と言いながらも入らない選択はないのかなと思います。ポイント制で必ず何かやらないといけない制度に違和感もあります。でもそうでもしないと活動してくれる人を確保できないのだろうとも思います。<br>役員等をやって頂いてる方には本当に感謝しかありません。<br>自分にできるようなことがあるのか、、、<br>活動内容を書面で拝見した時に自分にできそうなものがないと思ってしまいました。<br>不器用で右も左もわからない人が活動に参加しても足を引っ張ってしまうのではという不安もあります。</div>
+        </div>
+        <div class="fc-card" id="fc-47">
+          <div class="fc-num">#47</div>
+          <div class="fc-text">会議、作業、清掃などPTAの活動の為に時間を捻出して学校に出向いているので、自転車を学校までの交通手段として公認してもらえると良い。特に、未就学児連れだと、徒歩だと負担が大きすぎて、参加が辛すぎる。</div>
+        </div>
+        <div class="fc-card" id="fc-48">
+          <div class="fc-num">#48</div>
+          <div class="fc-text">PTA活動ではないかもしれないが、子供達の学校環境がより良く豊かになるように寄付できる制度などあるとよい。夏の猛暑への対策をどうにかしたく、PTA会費からではなく保護者からの寄付で対策できるなら寄付したいという方は多いと思う。</div>
+        </div>
+        <div class="fc-card" id="fc-49">
+          <div class="fc-num">#49</div>
+          <div class="fc-text">PTAのあり方や携わり方が変わることには賛成ですが、関わり方が多岐にわたることで、子どもたちの経験に差が出ることがないようにしてほしいです。</div>
+        </div>
+        <div class="fc-card" id="fc-50">
+          <div class="fc-num">#50</div>
+          <div class="fc-text">ベルマーク←作業に時間がかかるわりに、対価が少ないと感じるため</div>
+        </div>
+        <div class="fc-card" id="fc-51">
+          <div class="fc-num">#51</div>
+          <div class="fc-text">共働き世帯が参加しやすいよう、集まりを土日もくしは平日の昼休み時間帯のオンラインに設定するのはいかがでしょうか。オンラインなら欠席者が録画視聴できますし。<br>また、会員がほとんど母親である現状が気になっており、お父さんたちがもっと参加しやすくすれば、役員や委員の成り手が今の2倍に増えますし、活動内容にも多様性や新しいアイデアが出てくると思います。</div>
+        </div>
+        <div class="fc-card" id="fc-52">
+          <div class="fc-num">#52</div>
+          <div class="fc-text">強制ではないことで、かえって活動に興味がわくような気がする。責任なく申し上げてしまいますが、今までの勧誘電話みたいなやり方が恐怖すぎて、、これから新しいやり方が伝われば皆さんやはり子どもの学校生活の事なので、純粋に関わりたい気持ちが出てくるのではないかと思うし、またそういう雰囲気になってもらえたら嬉しいです。</div>
+        </div>
+        <div class="fc-card" id="fc-53">
+          <div class="fc-num">#53</div>
+          <div class="fc-text">ベルマーク係。<br>ベルマーク収集のような地道なマンパワーが必要なものは今の時代にそぐわないのどはないか。協賛側の仕組み作りも必要だが「かわてく」のようなオンラインポイントによる寄付がベターと思われる。<br>※ベルマーク係側の負担減らす集め方の案内もあったが、集めても学校に出向く際にしか提出できないし指定された場所にも提出先を見つけられなかった。<br>同じ寄付の仕組みなら、当面は今ある「かわてく」の活用を推進する係や活動に変更してはどうか。</div>
+        </div>
+        <div class="fc-card" id="fc-54">
+          <div class="fc-num">#54</div>
+          <div class="fc-text">会費を上げて良いので、役員や委員の負担を減らした方が良いと思う。</div>
+        </div>
+        <div class="fc-card" id="fc-55">
+          <div class="fc-num">#55</div>
+          <div class="fc-text">ベルマーク→労力の割にメリットがあるのか？<br><br>こども110更新→訪問せず、電話で確認し、新しいステッカーが必要な場合だけ訪問ではどうか？<br><br>役員や係のポイント制でなく、有志だけで成り立つならその方がよいかと思いますが、成り立つのか？</div>
+        </div>
+        <div class="fc-card" id="fc-56">
+          <div class="fc-num">#56</div>
+          <div class="fc-text">ポイント制度を見直したほうがいいと思います。近隣小学校ではすでにポイント制を廃止して、活動に参加できる人が運営してる所もあるようですので。各家庭ライフスタイルも違うので、臨機応変な対応が必要かと思います。</div>
+        </div>
+        <div class="fc-card" id="fc-57">
+          <div class="fc-num">#57</div>
+          <div class="fc-text">ベルマーク　会費を増やせば良い<br>きらどき　子どもは楽しむからあっても良いが、一度イベントをして何が達成されるのかは分からない<br>旗振り　これを地域の方にお願いしてみんなで子供達を見守ってもらえると良いのではないか<br>広報　あまり読まない</div>
+        </div>
+        <div class="fc-card" id="fc-58">
+          <div class="fc-num">#58</div>
+          <div class="fc-text">アイデアなどは、すでにご提案頂いているので、追加はないのですが、今の時代にあったPTAに改革頂いていることに、全面的に賛成です。そして変化を起こすのは大変なエネルギーが必要だと思いますので、ただただ感謝しております。</div>
+        </div>
+        <div class="fc-card" id="fc-59">
+          <div class="fc-num">#59</div>
+          <div class="fc-text">ポイント制の廃止をして欲しい。近隣でもすでに廃止している小学校が増えているのに、遅れていると思う。</div>
+        </div>
+        <div class="fc-card" id="fc-60">
+          <div class="fc-num">#60</div>
+          <div class="fc-text">なし</div>
+        </div>
+        <div class="fc-card" id="fc-61">
+          <div class="fc-num">#61</div>
+          <div class="fc-text">ベルマークはもういらないのでは?と思います。</div>
+        </div>
+    </div>
+  </div>
 <div class="footer">
   本レポートは第1回意識調査アンケートの集計結果をまとめたものです。個人が特定される情報は一切含まれておりません。<br>
   <a href="report_summary.html" style="color:#0071c1;">→ 1〜3回まとめレポートを見る</a>
@@ -353,6 +659,36 @@ new Chart(document.getElementById('chartQ4'), { type:'bar', data:{
 new Chart(document.getElementById('chartQ5'), { type:'pie', data:{ labels:['時々感じる','あまり感じない','わからない','強く感じる','全く感じない'], datasets:[{ data:[109,86,64,32,17], backgroundColor:[C.orange,C.teal,C.gray,C.red,C.blue], borderWidth:2, borderColor:'#fff' }] }, options:{...opts,...tip()} });
 new Chart(document.getElementById('chartQ6'), { type:'pie', data:{ labels:['賛成','どちらでもよい','条件付き賛成（キャッシュレスなら）','反対'], datasets:[{ data:[170,98,36,4], backgroundColor:[C.blue,C.gray,C.teal,C.red], borderWidth:2, borderColor:'#fff' }] }, options:{...opts,...tip()} });
 new Chart(document.getElementById('chartQ7'), { type:'pie', data:{ labels:['賛成（スマホで完結するなら楽）','大賛成（紙をなくしてほしい）','どちらでもよい','反対（紙も手元に欲しい）'], datasets:[{ data:[175,74,57,2], backgroundColor:[C.blue,C.teal,C.yellow,C.red], borderWidth:2, borderColor:'#fff' }] }, options:{...opts,...tip()} });
+</script>
+<script>
+
+function filterComments() {
+  const q = document.getElementById('fc-search').value.trim().toLowerCase();
+  const cards = document.querySelectorAll('.fc-card');
+  let shown = 0;
+  cards.forEach(card => {
+    const text = card.querySelector('.fc-text');
+    const orig = text.getAttribute('data-orig') || text.innerText;
+    text.setAttribute('data-orig', orig);
+    if (!q || orig.toLowerCase().includes(q)) {
+      card.classList.remove('hidden');
+      card.classList.toggle('highlight', !!q);
+      // ハイライト
+      if (q) {
+        const re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+        text.innerHTML = orig.replace(re, m => `<mark>${m}</mark>`);
+      } else {
+        text.innerHTML = orig;
+      }
+      shown++;
+    } else {
+      card.classList.add('hidden');
+      card.classList.remove('highlight');
+    }
+  });
+  document.getElementById('fc-count').textContent = shown + '件表示中';
+}
+
 </script>
 </body>
 </html>

@@ -390,6 +390,126 @@
     </div>
   </div>
 
+  <!-- 自由回答インサイト -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">💬</span>
+      <div>
+        <div class="section-title">自由回答から見えた保護者の声（151件）</div>
+        <div class="section-subtitle">3回分の自由回答を横断的に分析。繰り返し出てきたテーマと代表的なコメントをまとめます。</div>
+      </div>
+    </div>
+
+    <!-- ① キーワード頻度チャート -->
+    <div class="card" style="margin-bottom:24px;">
+      <div style="font-size:0.857rem;font-weight:700;margin-bottom:4px;">① 3回を通じて繰り返し出てきたテーマ（自由回答 延べ件数）</div>
+      <div class="q-note" style="margin-bottom:20px;">各コメントに含まれるキーワードで分類。1件のコメントが複数テーマに該当する場合あり。</div>
+      <div style="position:relative;height:320px;"><canvas id="chartKeywords"></canvas></div>
+    </div>
+
+    <!-- ② カテゴリ別の声 -->
+    <div style="font-size:0.857rem;font-weight:700;margin-bottom:12px;">② カテゴリ別の代表的なコメント</div>
+
+    <!-- 感謝・支持 -->
+    <div style="margin-bottom:20px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+        <span style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:#e8f4fd;border-radius:50%;font-size:0.857rem;">👏</span>
+        <span style="font-weight:700;font-size:1rem;color:#23221e;">感謝・支持</span>
+        <span style="font-size:0.75rem;color:#706d65;">─ 3回合計 40件（全体の26.5%）</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+        <div style="background:#fff;border:1px solid #d6d3d0;border-radius:6px;padding:16px;border-top:3px solid #2d7df0;">
+          <div style="font-size:0.75rem;font-weight:700;color:#2d7df0;margin-bottom:8px;">第1回</div>
+          <div style="font-size:0.857rem;line-height:1.7;color:#23221e;">「改革を進めていただきありがとうございます。お忙しい中運営に携わっている方々には感謝しかありません」</div>
+        </div>
+        <div style="background:#fff;border:1px solid #d6d3d0;border-radius:6px;padding:16px;border-top:3px solid #0077c7;">
+          <div style="font-size:0.75rem;font-weight:700;color:#0077c7;margin-bottom:8px;">第2回</div>
+          <div style="font-size:0.857rem;line-height:1.7;color:#23221e;">「諸々、建設的なご検討、本当にありがとうございます。特にありません。運営にお任せします」</div>
+        </div>
+        <div style="background:#fff;border:1px solid #d6d3d0;border-radius:6px;padding:16px;border-top:3px solid #005fa3;">
+          <div style="font-size:0.75rem;font-weight:700;color:#005fa3;margin-bottom:8px;">第3回</div>
+          <div style="font-size:0.857rem;line-height:1.7;color:#23221e;">「たとえ初年度にうまくいかないことがあったとしても、変えていく努力をしていただけることが素晴らしい。困ったらまた修正すればよいので、まずは現行案でやってほしい」</div>
+        </div>
+      </div>
+      <div style="margin-top:10px;padding:10px 14px;background:#e8f4fd;border-radius:6px;font-size:0.857rem;color:#23221e;">
+        <strong>示唆：</strong>回を追うごとに「支持・感謝」の声が増加（第1回10件→第3回19件）。具体的な制度が見えてくるほど保護者の共感が深まっています。
+      </div>
+    </div>
+
+    <!-- 制度への疑問 -->
+    <div style="margin-bottom:20px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+        <span style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:#fffde7;border-radius:50%;font-size:0.857rem;">❓</span>
+        <span style="font-weight:700;font-size:1rem;color:#23221e;">制度への疑問・不安</span>
+        <span style="font-size:0.75rem;color:#706d65;">─ 情報発信・透明性・公平性に関する声</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+        <div style="background:#fff;border:1px solid #d6d3d0;border-radius:6px;padding:16px;border-top:3px solid #2d7df0;">
+          <div style="font-size:0.75rem;font-weight:700;color:#2d7df0;margin-bottom:8px;">第1回</div>
+          <div style="font-size:0.857rem;line-height:1.7;color:#23221e;">「PTAの全貌が中々見えておりません。どのような役職があり、どのような活動をされているのか。フルタイムの仕事でも参加できるのか、かなり不透明です」</div>
+        </div>
+        <div style="background:#fff;border:1px solid #d6d3d0;border-radius:6px;padding:16px;border-top:3px solid #0077c7;">
+          <div style="font-size:0.75rem;font-weight:700;color:#0077c7;margin-bottom:8px;">第2回</div>
+          <div style="font-size:0.857rem;line-height:1.7;color:#23221e;">「未納額が増えた場合に今まで出来ていた支援はできなくなるということを最初にはっきり説明すれば良いと思います。払っている人と払っていない人の扱いを明確に」</div>
+        </div>
+        <div style="background:#fff;border:1px solid #d6d3d0;border-radius:6px;padding:16px;border-top:3px solid #005fa3;">
+          <div style="font-size:0.75rem;font-weight:700;color:#005fa3;margin-bottom:8px;">第3回</div>
+          <div style="font-size:0.857rem;line-height:1.7;color:#23221e;">「新しい枠組みに変わったあと、現在ある役員や係・ポイント制との関係がまだ理解できていない。新旧の変化を分かりやすく整理いただけると助かります」</div>
+        </div>
+      </div>
+      <div style="margin-top:10px;padding:10px 14px;background:#fffde7;border-radius:6px;font-size:0.857rem;color:#23221e;">
+        <strong>示唆：</strong>疑問の内容が回を経て変化しています。第1回は「PTAとは何か」という基礎的疑問→第2回は「お金のルール」→第3回は「新旧制度の移行期の混乱」。段階的な情報発信が効果的です。
+      </div>
+    </div>
+
+    <!-- 改善提案 -->
+    <div style="margin-bottom:20px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+        <span style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:#e8f5e9;border-radius:50%;font-size:0.857rem;">💡</span>
+        <span style="font-weight:700;font-size:1rem;color:#23221e;">改善提案</span>
+        <span style="font-size:0.75rem;color:#706d65;">─ 3回を通じて最も多様な声が集まったカテゴリ</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+        <div style="background:#fff;border:1px solid #d6d3d0;border-radius:6px;padding:16px;border-top:3px solid #2d7df0;">
+          <div style="font-size:0.75rem;font-weight:700;color:#2d7df0;margin-bottom:8px;">第1回</div>
+          <div style="font-size:0.857rem;line-height:1.7;color:#23221e;">「ベルマーク廃止」「清掃は業者へ」「役割をしない代わりに会費を多く払う選択肢がほしい」「自宅でできる作業を増やしてほしい」</div>
+        </div>
+        <div style="background:#fff;border:1px solid #d6d3d0;border-radius:6px;padding:16px;border-top:3px solid #0077c7;">
+          <div style="font-size:0.75rem;font-weight:700;color:#0077c7;margin-bottom:8px;">第2回</div>
+          <div style="font-size:0.857rem;line-height:1.7;color:#23221e;">「コンビニ払いも選択肢に」「入金状況をアプリで確認できるように」「会費規模に応じて活動内容を事前に明示してほしい」</div>
+        </div>
+        <div style="background:#fff;border:1px solid #d6d3d0;border-radius:6px;padding:16px;border-top:3px solid #005fa3;">
+          <div style="font-size:0.75rem;font-weight:700;color:#005fa3;margin-bottom:8px;">第3回</div>
+          <div style="font-size:0.857rem;line-height:1.7;color:#23221e;">「外注より先にPTAの仕事を見える化して、不要な仕事を洗い出すべき」「役員の癒着防止と同様に、役員任期の上限も設けるべき」「サポーターA会費は5,400円が妥当」</div>
+        </div>
+      </div>
+      <div style="margin-top:10px;padding:10px 14px;background:#e8f5e9;border-radius:6px;font-size:0.857rem;color:#23221e;">
+        <strong>示唆：</strong>第1回の「ベルマーク廃止・外注化」といった大きな方向感の提案から、第3回では「金額の具体値・公平性のルール」という精度の高い提案へと深化しています。保護者の当事者意識が高まっていることの表れです。
+      </div>
+    </div>
+
+    <!-- ③ 繰り返し出た声 -->
+    <div style="font-size:0.857rem;font-weight:700;margin-bottom:12px;">③ 3回を通じて一貫して出てきた声（継続課題）</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px;">
+      <div style="background:#fff;border:1px solid #e01e5a;border-radius:6px;padding:16px;">
+        <div style="font-size:0.75rem;font-weight:700;color:#e01e5a;margin-bottom:6px;">🔴 役員・係の負担感（3回合計45件・最多）</div>
+        <div style="font-size:0.857rem;line-height:1.7;color:#23221e;">「強制的な選出をやめてほしい」「フルタイムで働いていると平日の活動は無理」「役割をしない代わりに会費を多く払う選択肢を」という声が3回すべてに登場。スタイル制はこの声への直接的な回答です。</div>
+      </div>
+      <div style="background:#fff;border:1px solid #ff9900;border-radius:6px;padding:16px;">
+        <div style="font-size:0.75rem;font-weight:700;color:#c06000;margin-bottom:6px;">🟠 活動内容の「見える化」要求（3回を通じて継続）</div>
+        <div style="font-size:0.857rem;line-height:1.7;color:#23221e;">「PTAが何をしているかわからない」「会費の使い道が不明」「不要な仕事を洗い出してから会費論議を」。デジタル化が進んでも、コンテンツの透明性向上は引き続き課題です。</div>
+      </div>
+      <div style="background:#fff;border:1px solid #0077c7;border-radius:6px;padding:16px;">
+        <div style="font-size:0.75rem;font-weight:700;color:#0077c7;margin-bottom:6px;">🔵 子どものことを軸に判断したい（20件）</div>
+        <div style="font-size:0.857rem;line-height:1.7;color:#23221e;">「自分の子どもが不利益を被るかどうかが一番の関心事」「子どもが楽しく生活できるなら手伝いたい」。入会判断の動機は常に「子どものため」であり、非会員デメリットの具体的な提示が加入促進に直結します。</div>
+      </div>
+      <div style="background:#fff;border:1px solid #4bb47d;border-radius:6px;padding:16px;">
+        <div style="font-size:0.75rem;font-weight:700;color:#2a7a2a;margin-bottom:6px;">🟢 過去の活動・改革者への敬意（第3回に集中・4件）</div>
+        <div style="font-size:0.857rem;line-height:1.7;color:#23221e;">「過去役員でがんばった身としては現会長による過去ディスりが刺さった」「改革はありがたいが過去の活動には敬意を示しながら進めてほしい」。変革コミュニケーションに丁寧さが求められています。</div>
+      </div>
+    </div>
+  </div>
+
   <!-- 各回レポートリンク -->
   <div class="section">
     <div class="card">
@@ -450,6 +570,37 @@ new Chart(document.getElementById('chartOutsource'), { type:'bar', data:{
   labels:['【廃止】ニーズの低い行事・会議の削減','【外注】学校清掃・美化のプロ委託','【運用】会費の金額調整・事業見直し','【外注】会計・事務のプロ委託','【外注】地域見守り・安全確保','【外注】行事設営・力仕事'],
   datasets:[{ label:'回答件数', data:[206,144,142,127,91,89], backgroundColor:[C.navy,C.blue,C.teal,C.green,C.lb,C.yellow], borderRadius:4 }]
 }, options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: ctx => ` ${ctx.raw}件 (${(ctx.raw/304*100).toFixed(1)}%)` }}}, scales:{ x:{ beginAtZero:true, max:250, grid:{color:'#edebe8'}, ticks:{font:{size:11}} }, y:{ ticks:{font:{size:11}}, grid:{display:false} } } }});
+
+// キーワード頻度（積み上げ横棒）
+new Chart(document.getElementById('chartKeywords'), { type:'bar', data:{
+  labels:[
+    '役員・係の負担',
+    '感謝・ありがとう',
+    '会費・金額',
+    '改革への支持',
+    '活動の削減・廃止',
+    '子どものため',
+    'ベルマーク廃止',
+    '共働き・時間が取れない',
+    'デジタル・アプリ',
+    '外注・外部委託',
+    '強制・任意加入',
+    '情報発信・説明不足',
+  ],
+  datasets:[
+    { label:'第1回', data:[22,10,11,5,14,9,16,9,5,7,10,5], backgroundColor:'#2d7df0', borderRadius:0 },
+    { label:'第2回', data:[13,11,7,11,7,2,0,1,9,0,0,2], backgroundColor:'#0077c7', borderRadius:0 },
+    { label:'第3回', data:[10,19,14,13,6,9,1,7,2,6,3,5], backgroundColor:'#005fa3', borderRadius:4 },
+  ]
+}, options:{
+  indexAxis:'y', responsive:true, maintainAspectRatio:false,
+  plugins:{ legend:{ position:'bottom', labels:{ font:{size:11}, padding:12, boxWidth:14, boxHeight:14 }},
+    tooltip:{ callbacks:{ label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}件` }}},
+  scales:{
+    x:{ stacked:true, grid:{color:'#edebe8'}, ticks:{font:{size:11}}, max:50 },
+    y:{ stacked:true, ticks:{font:{size:11}}, grid:{display:false} }
+  }
+}});
 
 // 最適化
 new Chart(document.getElementById('chartOptimize'), { type:'doughnut', data:{
