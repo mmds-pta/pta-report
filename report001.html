@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第1回 PTA意識調査 アンケート結果レポート</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  @font-face { font-family: AdjustedYuGothic; font-weight: 400; src: local("Yu Gothic Medium"); }
+  @font-face { font-family: AdjustedYuGothic; font-weight: 700; src: local("Yu Gothic Bold"); }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: AdjustedYuGothic, "Yu Gothic", YuGothic, "Hiragino Sans", sans-serif; font-size: 16px; line-height: 1.5; color: #23221e; background: #f8f7f6; }
+  .site-header { background: #0077c7; color: #fff; padding: 32px 0; }
+  .site-header .inner { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+  .site-header .label { font-size: 0.857rem; letter-spacing: 0.1rem; opacity: 0.85; margin-bottom: 8px; }
+  .site-header h1 { font-size: 2rem; font-weight: 700; line-height: 1.25; margin-bottom: 8px; }
+  .site-header .meta { font-size: 0.857rem; opacity: 0.85; }
+  .nav-bar { background: #005fa3; padding: 0 24px; display: flex; justify-content: center; gap: 4px; }
+  .nav-bar a { display: inline-block; padding: 10px 18px; color: rgba(255,255,255,0.75); font-size: 0.857rem; text-decoration: none; border-bottom: 3px solid transparent; }
+  .nav-bar a.active { color: #fff; border-bottom-color: #fff; font-weight: 700; }
+  .nav-bar a:hover { color: #fff; }
+  .container { max-width: 960px; margin: 0 auto; padding: 40px 24px; }
+  .summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 40px; }
+  .summary-card { background: #fff; border: 1px solid #d6d3d0; border-radius: 6px; padding: 24px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+  .summary-card .num { font-size: 2.5rem; font-weight: 700; color: #0077c7; line-height: 1.1; }
+  .summary-card .unit { font-size: 1rem; font-weight: 700; color: #0077c7; }
+  .summary-card .desc { font-size: 0.857rem; color: #706d65; margin-top: 6px; }
+  .section { margin-bottom: 40px; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid #0077c7; }
+  .section-number { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: #0077c7; color: #fff; border-radius: 50%; font-size: 0.857rem; font-weight: 700; flex-shrink: 0; }
+  .section-title { font-size: 1.2rem; font-weight: 700; line-height: 1.4; color: #23221e; }
+  .section-subtitle { font-size: 0.857rem; color: #706d65; margin-top: 2px; }
+  .card { background: #fff; border: 1px solid #d6d3d0; border-radius: 6px; padding: 24px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+  .chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+  .chart-card { background: #fff; border: 1px solid #d6d3d0; border-radius: 6px; padding: 24px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+  .chart-card h3 { font-size: 0.857rem; font-weight: 700; color: #23221e; margin-bottom: 4px; line-height: 1.4; }
+  .q-note { font-size: 0.75rem; color: #706d65; margin-bottom: 16px; }
+  .chart-wrap { position: relative; height: 200px; }
+  .chart-wrap-bar { position: relative; height: 280px; }
+  .result-highlight { background: #f8f7f6; border-left: 4px solid #0077c7; border-radius: 0 6px 6px 0; padding: 12px 16px; margin-top: 16px; font-size: 0.857rem; color: #23221e; }
+  .result-highlight strong { color: #0077c7; font-size: 1rem; }
+  .bar-summary { margin-top: 8px; }
+  .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 0.857rem; }
+  .bar-label { width: 260px; flex-shrink: 0; color: #23221e; line-height: 1.3; }
+  .bar-track { flex: 1; background: #edebe8; border-radius: 4px; height: 18px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 4px; }
+  .bar-pct { width: 50px; text-align: right; font-weight: 700; color: #23221e; flex-shrink: 0; }
+  .comment-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .comment-card { background: #fff; border: 1px solid #d6d3d0; border-radius: 6px; padding: 16px; font-size: 0.857rem; line-height: 1.6; color: #23221e; box-shadow: 0 2px 4px rgba(0,0,0,0.08); }
+  .comment-card::before { content: '\201C'; font-size: 2rem; color: #d6d3d0; line-height: 1; display: block; margin-bottom: 4px; }
+  .comment-tag { display: inline-block; background: #f2f1f0; color: #706d65; border-radius: 4px; padding: 2px 8px; font-size: 0.75rem; margin-top: 8px; }
+  .comment-tag.positive { background: #e8f4fd; color: #0077c7; }
+  .comment-tag.concern { background: #fff3cd; color: #8a6500; }
+  .comment-tag.request { background: #f0f9f0; color: #2a7a2a; }
+  .analysis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+  .analysis-item { display: flex; gap: 12px; padding: 16px; background: #fff; border: 1px solid #d6d3d0; border-radius: 6px; }
+  .analysis-icon { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+  .analysis-icon.blue { background: #e8f4fd; }
+  .analysis-icon.green { background: #e8f5e9; }
+  .analysis-icon.yellow { background: #fffde7; }
+  .analysis-icon.red { background: #fce4ec; }
+  .analysis-body h4 { font-size: 0.857rem; font-weight: 700; margin-bottom: 4px; color: #23221e; }
+  .analysis-body p { font-size: 0.857rem; color: #706d65; line-height: 1.5; }
+  .footer { background: #edebe8; border-top: 1px solid #d6d3d0; padding: 24px; text-align: center; font-size: 0.75rem; color: #706d65; margin-top: 40px; }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <div class="label">PTA 活動改革 ／ 第1回</div>
+    <h1>第1回 意識調査<br>アンケート結果レポート</h1>
+    <div class="meta">テーマ：PTAの任意性・参加形態・デジタル化 ／ 発行：2026年4月</div>
+  </div>
+</header>
+<nav class="nav-bar">
+  <a href="report001.html" class="active">第1回</a>
+  <a href="report002.html">第2回</a>
+  <a href="report003.html">第3回</a>
+  <a href="report_summary.html">1〜3回まとめ</a>
+</nav>
+<div class="container">
+
+  <div class="summary-grid">
+    <div class="summary-card">
+      <div class="num">308<span class="unit">件</span></div>
+      <div class="desc">有効回答数</div>
+    </div>
+    <div class="summary-card">
+      <div class="num">84.1<span class="unit">%</span></div>
+      <div class="desc">柔軟な仕組みを「必要・あっても良い」と回答</div>
+    </div>
+    <div class="summary-card">
+      <div class="num">80.8<span class="unit">%</span></div>
+      <div class="desc">デジタル（がくぷり）集約に賛成・大賛成</div>
+    </div>
+  </div>
+
+  <!-- Q1 & Q2 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">Q1</span>
+      <div>
+        <div class="section-title">PTAの任意性と柔軟な仕組みへのニーズ</div>
+        <div class="section-subtitle">任意加入の認知 ／ 柔軟な参加形態への賛否</div>
+      </div>
+    </div>
+    <div class="chart-row">
+      <div class="chart-card">
+        <h3>PTAへの加入が「任意」であることを知っていたか</h3>
+        <div class="q-note">n = 308</div>
+        <div class="chart-wrap"><canvas id="chartQ1"></canvas></div>
+        <div class="result-highlight">
+          「知っていた」は<strong>58.1%</strong>。約4割の保護者が任意加入について明確に認知していなかった状況がわかりました。
+        </div>
+      </div>
+      <div class="chart-card">
+        <h3>「入りたい時に入り、やめたい時にやめられる」柔軟な仕組みは必要か</h3>
+        <div class="q-note">n = 308</div>
+        <div class="chart-wrap"><canvas id="chartQ2"></canvas></div>
+        <div class="result-highlight">
+          「とても必要」＋「あっても良い」で<strong>84.1%</strong>が前向き。柔軟な参加形態へのニーズが明確に示されました。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3 複数回答 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">Q2</span>
+      <div>
+        <div class="section-title">希望する関わり方（複数回答）</div>
+        <div class="section-subtitle">選べる会員区分のイメージへの共感度</div>
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="font-size:0.857rem;font-weight:700;margin-bottom:4px;">各スタイルへの支持率</h3>
+      <div class="q-note" style="margin-bottom:20px;">複数回答可 ／ n = 308</div>
+      <div class="chart-wrap-bar"><canvas id="chartQ3"></canvas></div>
+      <div class="result-highlight" style="margin-top:16px;">
+        最多は<strong>賛助会員（55.5%）</strong>。活動参加は難しいが会費で支援したいという声が最も多く、第3回でのサポーターA人気（25%）の原点が見えます。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q4 複数回答 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">Q3</span>
+      <div>
+        <div class="section-title">参加を前向きに検討できる仕組み・特典（複数回答）</div>
+        <div class="section-subtitle">どんなインセンティブがあれば入会を考えるか</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="chart-wrap-bar"><canvas id="chartQ4"></canvas></div>
+      <div class="result-highlight" style="margin-top:16px;">
+        「役員・委員の完全免除」が<strong>44.5%</strong>でトップ。役員負担の重さが参加ハードルになっていることが顕著です。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q5 & Q6 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">Q4</span>
+      <div>
+        <div class="section-title">透明性・会費徴収・デジタル化について</div>
+        <div class="section-subtitle">運営への信頼感と利便性改善への意向</div>
+      </div>
+    </div>
+    <div class="chart-row">
+      <div class="chart-card">
+        <h3>運営の透明性・改善の必要性を感じるか</h3>
+        <div class="q-note">n = 308</div>
+        <div class="chart-wrap"><canvas id="chartQ5"></canvas></div>
+        <div class="result-highlight">
+          「強く感じる」「時々感じる」合計<strong>45.8%</strong>。半数近くが改善の必要性を感じており、透明性向上への期待が確認されました。
+        </div>
+      </div>
+      <div class="chart-card">
+        <h3>会費徴収の「年1回一括」への賛否</h3>
+        <div class="q-note">n = 308</div>
+        <div class="chart-wrap"><canvas id="chartQ6"></canvas></div>
+        <div class="result-highlight">
+          「賛成」「条件付き賛成」で<strong>66.9%</strong>。手続きの簡素化へのニーズが高い結果でした。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q7 & Q8 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">Q5</span>
+      <div>
+        <div class="section-title">デジタル化・手伝えることについて</div>
+      </div>
+    </div>
+    <div class="chart-row">
+      <div class="chart-card">
+        <h3>PTAをデジタル（がくぷり）に完全集約することへの賛否</h3>
+        <div class="q-note">n = 308</div>
+        <div class="chart-wrap"><canvas id="chartQ7"></canvas></div>
+        <div class="result-highlight">
+          「大賛成」「賛成」合計<strong>80.8%</strong>。デジタル移行への支持は非常に高く、第2回のツール選定議論の土台となりました。
+        </div>
+      </div>
+      <div class="chart-card">
+        <h3>「これなら手伝える」こと（複数回答）</h3>
+        <div class="q-note">n = 308</div>
+        <div class="bar-summary" style="margin-top:12px;">
+          <div class="bar-row">
+            <div class="bar-label">特にない</div>
+            <div class="bar-track"><div class="bar-fill" style="width:52.3%;background:#aaa69f;"></div></div>
+            <div class="bar-pct">52.3%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">マンパワー（設営・パトロール等）</div>
+            <div class="bar-track"><div class="bar-fill" style="width:35.4%;background:#2d7df0;"></div></div>
+            <div class="bar-pct">35.4%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">IT・デジタル</div>
+            <div class="bar-track"><div class="bar-fill" style="width:6.8%;background:#00c4cc;"></div></div>
+            <div class="bar-pct">6.8%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">クリエイティブ（デザイン等）</div>
+            <div class="bar-track"><div class="bar-fill" style="width:6.5%;background:#4bb47d;"></div></div>
+            <div class="bar-pct">6.5%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">専門知識（法律・会計等）</div>
+            <div class="bar-track"><div class="bar-fill" style="width:4.9%;background:#ffcd00;"></div></div>
+            <div class="bar-pct">4.9%</div>
+          </div>
+        </div>
+        <div class="result-highlight">
+          「特にない」が過半数。手伝えることがある人の中では「マンパワー」が最多でした。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 自由記述 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">💬</span>
+      <div>
+        <div class="section-title">保護者からのご意見・ご感想（抜粋）</div>
+        <div class="section-subtitle">自由回答 61件より</div>
+      </div>
+    </div>
+    <div class="comment-grid">
+      <div class="comment-card">
+        PTA費が高すぎると思います。毎年恒例だからとなんとなく予算を使いきるのではなく、真に子ども達のために必要であるのか検討をお願いします。
+        <div><span class="comment-tag concern">会費の見直し要望</span></div>
+      </div>
+      <div class="comment-card">
+        お金を多く払ってもいいので、PTA主催の清掃などは業者さんに任せてもいいと思います。
+        <div><span class="comment-tag request">外注化の要望</span></div>
+      </div>
+      <div class="comment-card">
+        PTAの外部委託など、会費を払って保護者の活動負担がなくなる仕組みを検討していただきたいです。
+        <div><span class="comment-tag request">外注化の要望</span></div>
+      </div>
+      <div class="comment-card">
+        ベルマーク運動はいらないと思います。寄付金制度にしてほしいです。クラウドファンディングとかでも良い気がします。
+        <div><span class="comment-tag concern">不要な活動の削減</span></div>
+      </div>
+      <div class="comment-card">
+        PTAの改善に努めてくださりありがとうございます。クラスの懇談会も出席する人が少なくなっていますし、不必要な行事は削っていく方向で良いと思います。
+        <div><span class="comment-tag positive">改革への支持</span></div>
+      </div>
+      <div class="comment-card">
+        係にポイントがつかないのが疑問で不満なので改善してほしい。匿名の推薦制度も特に嫌でした。
+        <div><span class="comment-tag concern">制度の公平性への意見</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 総括 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">📊</span>
+      <div>
+        <div class="section-title">総括・第1回調査のまとめ</div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:16px;">
+      <p style="font-size:1rem;line-height:1.8;">
+        第1回調査では<strong>308名</strong>からご回答をいただきました。「PTAが任意加入」という基本事実の認知が6割にとどまっていることが明らかになり、まず正確な情報発信が急務であることが確認されました。また、柔軟な参加形態（84.1%）とデジタル化（80.8%）への高い期待が示され、第2回・第3回での制度設計の方向性を決定づける調査となりました。
+      </p>
+    </div>
+    <div class="analysis-grid">
+      <div class="analysis-item">
+        <div class="analysis-icon blue">📢</div>
+        <div class="analysis-body">
+          <h4>任意加入の周知が急務</h4>
+          <p>約4割が「任意」を知らなかった。正しい情報の積極的な発信が必要。</p>
+        </div>
+      </div>
+      <div class="analysis-item">
+        <div class="analysis-icon green">✅</div>
+        <div class="analysis-body">
+          <h4>柔軟な参加形態へのニーズが確認</h4>
+          <p>84.1%が前向き。スタイル制導入の議論を第3回へと繋いだ。</p>
+        </div>
+      </div>
+      <div class="analysis-item">
+        <div class="analysis-icon yellow">📱</div>
+        <div class="analysis-body">
+          <h4>デジタル化は強く支持</h4>
+          <p>80.8%が「がくぷり」集約に賛成。第2回のツール選定議論の根拠に。</p>
+        </div>
+      </div>
+      <div class="analysis-item">
+        <div class="analysis-icon red">♻️</div>
+        <div class="analysis-body">
+          <h4>不要な活動の見直し要望が多数</h4>
+          <p>ベルマーク廃止・清掃の外注化など、具体的な意見が多く寄せられた。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  本レポートは第1回意識調査アンケートの集計結果をまとめたものです。個人が特定される情報は一切含まれておりません。<br>
+  <a href="report_summary.html" style="color:#0071c1;">→ 1〜3回まとめレポートを見る</a>
+</div>
+
+<script>
+const C = { blue:'#2d7df0', teal:'#00c4cc', orange:'#ff9100', red:'#e65537', navy:'#2d4b9b', yellow:'#ffcd00', gray:'#aaa69f', green:'#4bb47d', lb:'#69d7ff' };
+const opts = { responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'right', labels:{ font:{size:11}, padding:8, boxWidth:14, boxHeight:14 } } } };
+const n = 308;
+const tip = (label) => ({ plugins:{ ...opts.plugins, tooltip:{ callbacks:{ label: ctx => ` ${ctx.label}: ${ctx.raw}件 (${(ctx.raw/n*100).toFixed(1)}%)` }}}});
+
+new Chart(document.getElementById('chartQ1'), { type:'pie', data:{ labels:['知っていた','聞いたことはある','知らなかった'], datasets:[{ data:[179,81,48], backgroundColor:[C.blue,C.yellow,C.red], borderWidth:2, borderColor:'#fff' }] }, options:{...opts,...tip()} });
+new Chart(document.getElementById('chartQ2'), { type:'pie', data:{ labels:['あっても良い','とても必要','どちらでもよい','不要'], datasets:[{ data:[165,94,41,8], backgroundColor:[C.blue,C.teal,C.yellow,C.red], borderWidth:2, borderColor:'#fff' }] }, options:{...opts,...tip()} });
+
+new Chart(document.getElementById('chartQ3'), { type:'bar', data:{
+  labels:['賛助会員（活動は難しいが会費で支援）','一般会員（役職なし、協力・議決に参加）','サポーター会員（単発で特定行事のみ）','非会員（入会しない）','わからない','運営メンバー（本部役員）'],
+  datasets:[{ label:'回答件数', data:[171,139,129,33,19,5], backgroundColor:[C.navy,C.blue,C.teal,C.red,C.gray,C.green], borderRadius:4 }]
+}, options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: ctx => ` ${ctx.raw}件 (${(ctx.raw/n*100).toFixed(1)}%)` }}}, scales:{ x:{ beginAtZero:true, max:200, grid:{color:'#edebe8'}, ticks:{font:{size:11}} }, y:{ ticks:{font:{size:11}}, grid:{display:false} } } }});
+
+new Chart(document.getElementById('chartQ4'), { type:'bar', data:{
+  labels:['役員・委員の完全免除','会合への出席免除','特に特典は求めない','学校行事での優先案内','わからない','活動負担に応じた会費割引','特典があっても入会検討しない'],
+  datasets:[{ label:'回答件数', data:[137,82,81,60,45,35,30], backgroundColor:[C.navy,C.blue,C.teal,C.green,C.gray,C.yellow,C.red], borderRadius:4 }]
+}, options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: ctx => ` ${ctx.raw}件 (${(ctx.raw/n*100).toFixed(1)}%)` }}}, scales:{ x:{ beginAtZero:true, max:160, grid:{color:'#edebe8'}, ticks:{font:{size:11}} }, y:{ ticks:{font:{size:11}}, grid:{display:false} } } }});
+
+new Chart(document.getElementById('chartQ5'), { type:'pie', data:{ labels:['時々感じる','あまり感じない','わからない','強く感じる','全く感じない'], datasets:[{ data:[109,86,64,32,17], backgroundColor:[C.orange,C.teal,C.gray,C.red,C.blue], borderWidth:2, borderColor:'#fff' }] }, options:{...opts,...tip()} });
+new Chart(document.getElementById('chartQ6'), { type:'pie', data:{ labels:['賛成','どちらでもよい','条件付き賛成（キャッシュレスなら）','反対'], datasets:[{ data:[170,98,36,4], backgroundColor:[C.blue,C.gray,C.teal,C.red], borderWidth:2, borderColor:'#fff' }] }, options:{...opts,...tip()} });
+new Chart(document.getElementById('chartQ7'), { type:'pie', data:{ labels:['賛成（スマホで完結するなら楽）','大賛成（紙をなくしてほしい）','どちらでもよい','反対（紙も手元に欲しい）'], datasets:[{ data:[175,74,57,2], backgroundColor:[C.blue,C.teal,C.yellow,C.red], borderWidth:2, borderColor:'#fff' }] }, options:{...opts,...tip()} });
+</script>
+</body>
+</html>

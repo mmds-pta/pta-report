@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第2回 PTA意識調査 アンケート結果レポート</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  @font-face { font-family: AdjustedYuGothic; font-weight: 400; src: local("Yu Gothic Medium"); }
+  @font-face { font-family: AdjustedYuGothic; font-weight: 700; src: local("Yu Gothic Bold"); }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: AdjustedYuGothic, "Yu Gothic", YuGothic, "Hiragino Sans", sans-serif; font-size: 16px; line-height: 1.5; color: #23221e; background: #f8f7f6; }
+  .site-header { background: #0077c7; color: #fff; padding: 32px 0; }
+  .site-header .inner { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+  .site-header .label { font-size: 0.857rem; letter-spacing: 0.1rem; opacity: 0.85; margin-bottom: 8px; }
+  .site-header h1 { font-size: 2rem; font-weight: 700; line-height: 1.25; margin-bottom: 8px; }
+  .site-header .meta { font-size: 0.857rem; opacity: 0.85; }
+  .nav-bar { background: #005fa3; padding: 0 24px; display: flex; justify-content: center; gap: 4px; }
+  .nav-bar a { display: inline-block; padding: 10px 18px; color: rgba(255,255,255,0.75); font-size: 0.857rem; text-decoration: none; border-bottom: 3px solid transparent; }
+  .nav-bar a.active { color: #fff; border-bottom-color: #fff; font-weight: 700; }
+  .nav-bar a:hover { color: #fff; }
+  .container { max-width: 960px; margin: 0 auto; padding: 40px 24px; }
+  .summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 40px; }
+  .summary-card { background: #fff; border: 1px solid #d6d3d0; border-radius: 6px; padding: 24px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+  .summary-card .num { font-size: 2.5rem; font-weight: 700; color: #0077c7; line-height: 1.1; }
+  .summary-card .unit { font-size: 1rem; font-weight: 700; color: #0077c7; }
+  .summary-card .desc { font-size: 0.857rem; color: #706d65; margin-top: 6px; }
+  .section { margin-bottom: 40px; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid #0077c7; }
+  .section-number { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: #0077c7; color: #fff; border-radius: 50%; font-size: 0.857rem; font-weight: 700; flex-shrink: 0; }
+  .section-title { font-size: 1.2rem; font-weight: 700; line-height: 1.4; color: #23221e; }
+  .section-subtitle { font-size: 0.857rem; color: #706d65; margin-top: 2px; }
+  .card { background: #fff; border: 1px solid #d6d3d0; border-radius: 6px; padding: 24px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+  .chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+  .chart-card { background: #fff; border: 1px solid #d6d3d0; border-radius: 6px; padding: 24px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+  .chart-card h3 { font-size: 0.857rem; font-weight: 700; color: #23221e; margin-bottom: 4px; line-height: 1.4; }
+  .q-note { font-size: 0.75rem; color: #706d65; margin-bottom: 16px; }
+  .chart-wrap { position: relative; height: 200px; }
+  .result-highlight { background: #f8f7f6; border-left: 4px solid #0077c7; border-radius: 0 6px 6px 0; padding: 12px 16px; margin-top: 16px; font-size: 0.857rem; color: #23221e; }
+  .result-highlight strong { color: #0077c7; font-size: 1rem; }
+  .comment-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .comment-card { background: #fff; border: 1px solid #d6d3d0; border-radius: 6px; padding: 16px; font-size: 0.857rem; line-height: 1.6; color: #23221e; box-shadow: 0 2px 4px rgba(0,0,0,0.08); }
+  .comment-card::before { content: '\201C'; font-size: 2rem; color: #d6d3d0; line-height: 1; display: block; margin-bottom: 4px; }
+  .comment-tag { display: inline-block; background: #f2f1f0; color: #706d65; border-radius: 4px; padding: 2px 8px; font-size: 0.75rem; margin-top: 8px; }
+  .comment-tag.positive { background: #e8f4fd; color: #0077c7; }
+  .comment-tag.concern { background: #fff3cd; color: #8a6500; }
+  .comment-tag.request { background: #f0f9f0; color: #2a7a2a; }
+  .analysis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+  .analysis-item { display: flex; gap: 12px; padding: 16px; background: #fff; border: 1px solid #d6d3d0; border-radius: 6px; }
+  .analysis-icon { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+  .analysis-icon.blue { background: #e8f4fd; }
+  .analysis-icon.green { background: #e8f5e9; }
+  .analysis-icon.yellow { background: #fffde7; }
+  .analysis-icon.red { background: #fce4ec; }
+  .analysis-body h4 { font-size: 0.857rem; font-weight: 700; margin-bottom: 4px; color: #23221e; }
+  .analysis-body p { font-size: 0.857rem; color: #706d65; line-height: 1.5; }
+  .big-stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 24px 0; }
+  .big-stat { text-align: center; padding: 24px; background: #fff; border: 1px solid #d6d3d0; border-radius: 6px; }
+  .big-stat .pct { font-size: 3rem; font-weight: 700; line-height: 1.1; }
+  .big-stat .lbl { font-size: 0.857rem; color: #706d65; margin-top: 6px; line-height: 1.4; }
+  .footer { background: #edebe8; border-top: 1px solid #d6d3d0; padding: 24px; text-align: center; font-size: 0.75rem; color: #706d65; margin-top: 40px; }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <div class="label">PTA 活動改革 ／ 第2回</div>
+    <h1>第2回 意識調査<br>アンケート結果レポート</h1>
+    <div class="meta">テーマ：集金の独立運営・ツール選定・入会ルール ／ 発行：2026年4月</div>
+  </div>
+</header>
+<nav class="nav-bar">
+  <a href="report001.html">第1回</a>
+  <a href="report002.html" class="active">第2回</a>
+  <a href="report003.html">第3回</a>
+  <a href="report_summary.html">1〜3回まとめ</a>
+</nav>
+<div class="container">
+
+  <div class="summary-grid">
+    <div class="summary-card">
+      <div class="num">318<span class="unit">件</span></div>
+      <div class="desc">有効回答数</div>
+    </div>
+    <div class="summary-card">
+      <div class="num">70.4<span class="unit">%</span></div>
+      <div class="desc">PTA独立集金に「賛成・条件付き賛成」</div>
+    </div>
+    <div class="summary-card">
+      <div class="num">67.0<span class="unit">%</span></div>
+      <div class="desc">「がくぷり」活用を支持</div>
+    </div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">Q1</span>
+      <div>
+        <div class="section-title">PTAが独立して集金機能を担う方向性について</div>
+        <div class="section-subtitle">学校に依存しない独自の集金システム導入への賛否</div>
+      </div>
+    </div>
+    <div class="chart-row">
+      <div class="chart-card">
+        <h3>集金の独立運営への賛否</h3>
+        <div class="q-note">n = 318</div>
+        <div class="chart-wrap"><canvas id="chartQ1"></canvas></div>
+        <div class="result-highlight">
+          「賛成」「条件付き賛成」で<strong>70.4%</strong>が前向き。「手数料が300円以下なら」という現実的な条件付き支持も多い結果でした。
+        </div>
+      </div>
+      <div class="chart-card" style="display:flex;flex-direction:column;justify-content:center;gap:16px;padding:24px;">
+        <div style="font-size:0.857rem;font-weight:700;margin-bottom:4px;">各回答の割合</div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:0.857rem;margin-bottom:4px;"><span>賛成（手数料がかかっても先生の負担をなくすべき）</span><strong>35.8%</strong></div>
+          <div style="background:#edebe8;border-radius:4px;height:12px;overflow:hidden;margin-bottom:12px;"><div style="width:35.8%;height:100%;background:#2d7df0;border-radius:4px;"></div></div>
+          <div style="display:flex;justify-content:space-between;font-size:0.857rem;margin-bottom:4px;"><span>条件付き賛成（手数料300円以下なら）</span><strong>34.6%</strong></div>
+          <div style="background:#edebe8;border-radius:4px;height:12px;overflow:hidden;margin-bottom:12px;"><div style="width:34.6%;height:100%;background:#00c4cc;border-radius:4px;"></div></div>
+          <div style="display:flex;justify-content:space-between;font-size:0.857rem;margin-bottom:4px;"><span>どちらでもいい（運営におまかせ）</span><strong>26.1%</strong></div>
+          <div style="background:#edebe8;border-radius:4px;height:12px;overflow:hidden;margin-bottom:12px;"><div style="width:26.1%;height:100%;background:#aaa69f;border-radius:4px;"></div></div>
+          <div style="display:flex;justify-content:space-between;font-size:0.857rem;margin-bottom:4px;"><span>反対（現状通り学校に依頼）</span><strong>3.5%</strong></div>
+          <div style="background:#edebe8;border-radius:4px;height:12px;overflow:hidden;"><div style="width:3.5%;height:100%;background:#e65537;border-radius:4px;"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">Q2</span>
+      <div>
+        <div class="section-title">集金ツールの選定について</div>
+        <div class="section-subtitle">「がくぷり」継続活用 vs 他社ツール</div>
+      </div>
+    </div>
+    <div class="chart-row">
+      <div class="chart-card">
+        <h3>どのツールがふさわしいか</h3>
+        <div class="q-note">n = 318</div>
+        <div class="chart-wrap"><canvas id="chartQ2"></canvas></div>
+        <div class="result-highlight">
+          <strong>67.0%</strong>が「がくぷり」活用を支持。「新たな登録不要・クレジット決済」の利便性が評価されました。
+        </div>
+      </div>
+      <div class="chart-card" style="display:flex;flex-direction:column;justify-content:center;align-items:center;gap:16px;">
+        <div style="text-align:center;">
+          <div style="font-size:5rem;font-weight:700;color:#0077c7;line-height:1;">67%</div>
+          <div style="font-size:0.857rem;color:#706d65;margin-top:4px;">が「がくぷり」活用を支持</div>
+        </div>
+        <div style="text-align:center;padding:16px;background:#f8f7f6;border-radius:6px;width:100%;">
+          <div style="font-size:0.75rem;color:#706d65;">選ばれた理由</div>
+          <div style="font-size:0.857rem;color:#23221e;margin-top:6px;line-height:1.6;">✔ 新たな登録が不要<br>✔ クレジット決済が使える<br>✔ すでに日常的に使い慣れている</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">Q3</span>
+      <div>
+        <div class="section-title">「誰も苦しまないためのルール」について</div>
+        <div class="section-subtitle">期限超過→自動辞退・督促なしの運用方針への賛否</div>
+      </div>
+    </div>
+    <div class="chart-row">
+      <div class="chart-card">
+        <h3>督促なし・期限超過で自動辞退ルールへの賛否</h3>
+        <div class="q-note">n = 318</div>
+        <div class="chart-wrap"><canvas id="chartQ3"></canvas></div>
+        <div class="result-highlight">
+          「賛成」43.1%、「やや不安（リマインド通知があれば納得）」36.2%。<strong>合計79.3%</strong>がリマインドを前提に理解。積極的な反対は1.9%のみでした。
+        </div>
+      </div>
+      <div class="chart-card" style="padding:24px;">
+        <div style="font-size:0.857rem;font-weight:700;margin-bottom:16px;">💡 自由意見から見えた「やや不安」の中身</div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div style="padding:12px;background:#fff3cd;border-radius:6px;font-size:0.857rem;line-height:1.5;border-left:4px solid #ffcc17;">「入金したっけ？となることがあるので、自分の入金状態をアプリで確認できれば不安はない」</div>
+          <div style="padding:12px;background:#fff3cd;border-radius:6px;font-size:0.857rem;line-height:1.5;border-left:4px solid #ffcc17;">「複数人学校が分かれれば忘れることもある。リマインドは欲しい」</div>
+          <div style="padding:12px;background:#e8f4fd;border-radius:6px;font-size:0.857rem;line-height:1.5;border-left:4px solid #0077c7;">→ リマインド通知機能の整備が「やや不安」解消の鍵</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 自由記述 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">💬</span>
+      <div>
+        <div class="section-title">保護者からのご意見・ご感想（抜粋）</div>
+        <div class="section-subtitle">自由回答 43件より</div>
+      </div>
+    </div>
+    <div class="comment-grid">
+      <div class="comment-card">
+        改革ありがとうございます。あまり無理なく、負荷なくできる活動ができればと思います。色々と大変な中でご検討いただき、本当にありがとうございます。
+        <div><span class="comment-tag positive">改革への支持</span></div>
+      </div>
+      <div class="comment-card">
+        がくぷりからの決済に賛成ですが、可能であればコンビニ払いもあると嬉しいです。
+        <div><span class="comment-tag request">支払い方法の多様化</span></div>
+      </div>
+      <div class="comment-card">
+        未納額が増えると思うが、集金できた額により今まで出来ていた支援はできなくなるということを最初にはっきり説明すれば良いと思います。○○円以下だった場合できることは…といった形で。
+        <div><span class="comment-tag request">透明な説明の要望</span></div>
+      </div>
+      <div class="comment-card">
+        比較表の作成ありがとうございます。わかりやすく、参考になりました。
+        <div><span class="comment-tag positive">情報提供への感謝</span></div>
+      </div>
+      <div class="comment-card">
+        入金したっけ？となることがあるので、自分の入金状態をアプリで確認できれば不安はありません。
+        <div><span class="comment-tag concern">入金確認機能の要望</span></div>
+      </div>
+      <div class="comment-card">
+        払っている人と払っていない人の扱いがどう違うのかを最初に明確に示してほしい。
+        <div><span class="comment-tag request">ルールの明確化要望</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 総括 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">📊</span>
+      <div>
+        <div class="section-title">総括・第2回調査のまとめ</div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:16px;">
+      <p style="font-size:1rem;line-height:1.8;">
+        第2回調査では<strong>318名</strong>からご回答をいただきました（1回比＋10名）。集金の独立運営（70.4%支持）と「がくぷり」活用（67.0%支持）という具体的な運営改革への方向性が、保護者の多数意見として確認されました。一方、「自動辞退ルール」については「リマインド通知があれば納得」という声が多く、丁寧な通知設計の必要性が示されました。
+      </p>
+    </div>
+    <div class="analysis-grid">
+      <div class="analysis-item">
+        <div class="analysis-icon blue">💳</div>
+        <div class="analysis-body">
+          <h4>独立集金：7割が支持</h4>
+          <p>先生の事務負担削減への共感が高い。手数料の透明な説明が鍵。</p>
+        </div>
+      </div>
+      <div class="analysis-item">
+        <div class="analysis-icon green">📱</div>
+        <div class="analysis-body">
+          <h4>がくぷり一本化が最善策</h4>
+          <p>67%が支持。既存ユーザーの利便性最優先という判断が支持された。</p>
+        </div>
+      </div>
+      <div class="analysis-item">
+        <div class="analysis-icon yellow">🔔</div>
+        <div class="analysis-body">
+          <h4>リマインド通知の整備が必須</h4>
+          <p>「やや不安」の多くはリマインドで解消できる懸念。通知設計を丁寧に。</p>
+        </div>
+      </div>
+      <div class="analysis-item">
+        <div class="analysis-icon red">📋</div>
+        <div class="analysis-body">
+          <h4>ルールの事前説明が重要</h4>
+          <p>「払う/払わないで何が変わるか」を事前に明確に案内することで不安を軽減。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  本レポートは第2回意識調査アンケートの集計結果をまとめたものです。個人が特定される情報は一切含まれておりません。<br>
+  <a href="report_summary.html" style="color:#0071c1;">→ 1〜3回まとめレポートを見る</a>
+</div>
+
+<script>
+const C = { blue:'#2d7df0', teal:'#00c4cc', orange:'#ff9100', red:'#e65537', navy:'#2d4b9b', yellow:'#ffcd00', gray:'#aaa69f', green:'#4bb47d' };
+const opts = { responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'right', labels:{ font:{size:11}, padding:8, boxWidth:14, boxHeight:14 } } } };
+const n = 318;
+const tip = () => ({ plugins:{ ...opts.plugins, tooltip:{ callbacks:{ label: ctx => ` ${ctx.label}: ${ctx.raw}件 (${(ctx.raw/n*100).toFixed(1)}%)` }}}});
+
+new Chart(document.getElementById('chartQ1'), { type:'pie', data:{ labels:['賛成（先生の負担をなくすべき）','条件付き賛成（手数料300円以下なら）','どちらでもいい','反対'], datasets:[{ data:[114,110,83,11], backgroundColor:[C.blue,C.teal,C.gray,C.red], borderWidth:2, borderColor:'#fff' }] }, options:{...opts,...tip()} });
+new Chart(document.getElementById('chartQ2'), { type:'doughnut', data:{ labels:['がくぷりを活用','どちらでもいい','他社ツール・独自決済'], datasets:[{ data:[213,101,4], backgroundColor:[C.blue,C.gray,C.red], borderWidth:2, borderColor:'#fff' }] }, options:{...opts, cutout:'60%',...tip()} });
+new Chart(document.getElementById('chartQ3'), { type:'pie', data:{ labels:['賛成（デジタルな割り切りは必要）','やや不安（リマインドがあれば納得）','どちらでもいい','反対（個別に督促すべき）'], datasets:[{ data:[137,115,60,6], backgroundColor:[C.blue,C.yellow,C.gray,C.red], borderWidth:2, borderColor:'#fff' }] }, options:{...opts,...tip()} });
+</script>
+</body>
+</html>

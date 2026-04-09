@@ -27,6 +27,11 @@
     background: #f8f7f6;
   }
 
+  .nav-bar { background: #005fa3; padding: 0 24px; display: flex; justify-content: center; gap: 4px; }
+  .nav-bar a { display: inline-block; padding: 10px 18px; color: rgba(255,255,255,0.75); font-size: 0.857rem; text-decoration: none; border-bottom: 3px solid transparent; }
+  .nav-bar a.active { color: #fff; border-bottom-color: #fff; font-weight: 700; }
+  .nav-bar a:hover { color: #fff; }
+
   /* Header */
   .site-header {
     background: #0077c7;
@@ -359,6 +364,12 @@
     <div class="meta">集計対象：全回答者 ／ 発行：2026年4月</div>
   </div>
 </header>
+<nav class="nav-bar">
+  <a href="report001.html">第1回</a>
+  <a href="report002.html">第2回</a>
+  <a href="report003.html" class="active">第3回</a>
+  <a href="report_summary.html">1〜3回まとめ</a>
+</nav>
 
 <!-- Main -->
 <div class="container">
